@@ -1,58 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FingerTracking Hands</title>
-  <style>
-    /* Set background color to #205AFC */
-    body {
-      background-color: #205AFC;
-    }
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+            BSL FingerSpelling!
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../View/css/home.css">
+    </head>
+    <body>
 
-    /* Add images of sign language */
-    img {
-      width: 100%;
-    }
+        <!-- This is the Navbar -->
+        <div class='navbar'>
+            <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+            
+            <nav>
+                <ul class="nav_links">
+                    <li class="nav1"><a href="#">Home</a></li>
+                    <li><a href="#">Levels</a></li>
+                    <li><a href="#">Sign Language Handbook</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </nav>
+            <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+        </div>
+            
+            
 
-    /* Style the "Start Your Journey" button */
-    .start-button {
-      background-color: #76C102;
-      border-radius: 50%; /* Make button circular */
-      color: white;
-      padding: 20px;
-      font-size: 20px;
-      font-family: Dongle;
-      text-align: center;
-      margin: 0 auto; /* Center button on the page */
-    }
+        <div class="bottom" style="margin-top: 100px;">
+            <img class="W" src="assets/w.png" alt="Sign Language W">
+            <img class="E" src="assets/e.png" alt="Sign Language E">
+            <img class="L" src="assets/l.png" alt="Sign Language L">
+            <img class="C" src="assets/c.png" alt="Sign Language C">
+            <img class="O" src="assets/o.png" alt="Sign Language O">
+            <img class="M" src="assets/m.png" alt="Sign Language M">
+            <img class="E" src="assets/e.png" alt="Sign Language E">
 
-    /* Style the navigation bar */
-    nav {
-      background-color: #0096DA;
-      color: white;
-      font-family: Dongle;
-      text-align: center;
-    }
+        </div>
+        
+        <div class= "Welcome-text">
+            <h1>Welcome!</h1>
+            <br>
+            <br>
+            <h2>Start your journey of BSL with Machine Learning</h2>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        
+        
+        <div class="container">
 
-    /* Make navigation bar responsive for mobile devices */
-    @media only screen and (max-width: 600px) {
-      nav {
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Learn</a>
-    <a href="#">About Us</a>
-    <a href="#">Levels</a>
-  </nav>
+            <div class="start-button">
+                <button class="btn" type="button" onclick="btn1()">Let's get Started!</button>
+            </div>
 
-  <img src="sign-language-1.jpg" alt="Sign language image">
-  <img src="sign-language-2.jpg" alt="Sign language image">
+        </div>
 
-  <button class="start-button">Start Your Journey</button>
-</body>
+
+        
+        
+        <script src="" async defer></script>
+    </body>
 </html>
