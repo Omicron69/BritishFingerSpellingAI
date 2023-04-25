@@ -1,103 +1,110 @@
-const phrases = [
-    "hello",
-    "goodbye",
-    "please",
-    "thanks",
-    "sorry",
-    "yes",
-    "no",
-    "help",
-    "fine",
-    "name",
-    "age",
-    "where",
-    "when",
-    "why",
-    "how",
-    "who",
-    "family",
-    "mother",
-    "father",
-    "brother",
-    "sister",
-    "friend",
-    "home",
-    "food",
-    "sleep",
-    "happy",
-    "sad",
-    "angry",
-    "love",
-    "like",
-    "sign"
-  ];
-
-const imageContainer = document.getElementById('image-container');
+const gameBoard = document.getElementById('game-board');
 const startButton = document.getElementById('start-button');
-const inputText = document.getElementById('input-text');
-const submitButton = document.getElementById('submit-button');
-const message = document.getElementById('message');
-const scoreElement = document.getElementById('score');
-let currentPhrase = '';
-let score = 0;
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const gridSize = 8;
+const totalPairs = (gridSize * gridSize) / 2;
 
 startButton.addEventListener('click', () => {
-    startNewRound();
-});
-
-submitButton.addEventListener('click', () => {
-    if (inputText.value.toLowerCase() === currentPhrase) {
-        score++;
-        message.textContent = 'Correct! Well done!';
-        message.style.color = 'green';
-        scoreElement.textContent = score;
-        setTimeout(() => {
-            startNewRound();
-        }, 1500);
-    } else {
-        alert(`Game over! The correct word was "${currentPhrase}".`);
-        resetGame();
-    }
-});
-
-function startNewRound() {
     startButton.disabled = true;
-    inputText.disabled = false;
-    submitButton.disabled = true; // Disable the submit button initially
-    message.textContent = '';
-    inputText.value = '';
-    inputText.focus();
-    currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    displayPhrase();
+    startGame();
+});
+
+function startGame() {
+    const cards = generateCards();
+    shuffle(cards);
+    createGameBoard(cards);
 }
 
-function displayPhrase() {
-    imageContainer.innerHTML = '';
-    let imagesDisplayed = 0;
+function generateCards() {
+    const cards = [];
 
-    for (let i = 0; i < currentPhrase.length; i++) {
-        const letter = currentPhrase[i].toUpperCase();
-        const img = document.createElement('img');
-        img.src = `../View/assets/${letter}.png`;
-        img.className = 'img-letter';
-        setTimeout(() => {
-            imageContainer.appendChild(img);
-            imagesDisplayed++;
+    for (let i = 0; i < totalPairs; i++) {
+        const letter = alphabet[i];
+        const imgSrc = `../View/assets/${letter}.png`;
 
-            if (imagesDisplayed === currentPhrase.length) {
-                submitButton.disabled = false; // Enable the submit button after all images are shown
-            }
-        }, 400 * i);
+        cards.push({
+            type: 'letter',
+            content: letter,
+        });
+
+        cards.push({
+            type: 'image',
+            content: imgSrc,
+        });
+    }
+
+    return cards;
+}
+
+function shuffle(cards) {
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 }
 
-function resetGame() {
-    startButton.disabled = false;
-    inputText.disabled = true;
-    submitButton.disabled = true;
-    message.textContent = '';
-    inputText.value = '';
-    score = 0;
-    scoreElement.textContent = score;
-    imageContainer.innerHTML = '';
+function createGameBoard(cards) {
+    gameBoard.innerHTML = '';
+    let firstCard = null;
+    let secondCard = null;
+    let isFlipping = false;
+
+    cards.forEach((card, index) => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card
+        cardElement.addEventListener('click', () => {
+            if (isFlipping) return;
+            flipCard(cardElement, card);
+
+            if (!firstCard) {
+                firstCard = { cardElement, card };
+            } else {
+                secondCard = { cardElement, card };
+                isFlipping = true;
+
+                setTimeout(() => {
+                    checkMatch(firstCard, secondCard);
+                    firstCard = null;
+                    secondCard = null;
+                    isFlipping = false;
+                }, 1000);
+            }
+        });
+
+        gameBoard.appendChild(cardElement);
+    });
+}
+
+function flipCard(cardElement, card) {
+    if (card.type === 'letter') {
+        cardElement.textContent = card.content;
+    } else {
+        const img = document.createElement('img');
+        img.src = card.content;
+        img.style.width = '50px';
+        img.style.height = '50px';
+        cardElement.appendChild(img);
+    }
+    cardElement.style.backgroundColor = 'white';
+    cardElement.style.color = 'black';
+}
+
+function checkMatch(firstCard, secondCard) {
+    if (firstCard.card.type === secondCard.card.type) {
+        unflipCards(firstCard.cardElement, secondCard.cardElement);
+    } else if (firstCard.card.content === secondCard.card.content) {
+        firstCard.cardElement.style.visibility = 'hidden';
+        secondCard.cardElement.style.visibility = 'hidden';
+    } else {
+        unflipCards(firstCard.cardElement, secondCard.cardElement);
+    }
+}
+
+function unflipCards(...cardElements) {
+    cardElements.forEach((cardElement) => {
+        cardElement.innerHTML = '';
+        cardElement.style.backgroundColor = '#4CAF50';
+        cardElement.style.color = 'white';
+    });
 }
