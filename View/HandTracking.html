@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hand Tracking</title>
-  <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"></script>
-  <style>
-    /* Style for the video element */
-    video {
-      width: 100%;
-    }
-
-    /* Style for the hand tracking overlay */
-    .hand-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    /* Style for the hand tracking circles */
-    .hand-overlay .circle {
-      fill: red;
-      stroke: white;
-      stroke-width: 2;
-    }
-  </style>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <video id="video" playsinline></video>
-
-  <svg class="hand-overlay">
-    <!-- Hand tracking circles will be added here -->
-  </svg>
-
-  <script>
-    // Get the video element
-    const video = document.getElementById("video");
-
-    // Get the hand tracking overlay element
-    const handOverlay = document.querySelector(".hand-overlay");
-
-    // Set up the hand tracking
-    const handTracker = new HandTracker();
-    handTracker.start(video);
-
-    handTracker.on("hand", (hand) => {
-      // Clear the previous hand overlay
-      handOverlay.innerHTML = "";
-
-      // Draw the new hand overlay
-      hand.forEach((finger) => {
-        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", finger.x);
-        circle.setAttribute("cy", finger.y);
-        circle.setAttribute("r", finger.radius);
-        handOverlay.appendChild(circle);
-      });
-    });
-  </script>
+  <link rel="stylesheet" href="../View/css/handtrack.css">
+  <div class="container">
+    <video class="input_video"></video>
+    <canvas class="output_canvas" width="1920px" height="1080px"></canvas>
+  </div>
 </body>
 </html>
+
+<script type="module">
+  const videoElement = document.getElementsByClassName('input_video')[0];
+  const canvasElement = document.getElementsByClassName('output_canvas')[0];
+  const canvasCtx = canvasElement.getContext('2d');
+  
+  function onResults(results) {
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(
+        results.image, 0, 0, canvasElement.width, canvasElement.height);
+    if (results.multiHandLandmarks) {
+      for (const landmarks of results.multiHandLandmarks) {
+        drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+                       {color: '#b042ff', lineWidth: 8});
+        drawLandmarks(canvasCtx, landmarks, {color: '#ff2400', lineWidth: 2});
+      }
+    }
+    canvasCtx.restore();
+  }
+  
+  const hands = new Hands({locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+  }});
+  hands.setOptions({
+    maxNumHands: 2,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
+  hands.onResults(onResults);
+  
+  const camera = new Camera(videoElement, {
+    onFrame: async () => {
+      await hands.send({image: videoElement});
+    },
+    width: 1920,
+    height: 1080
+  });
+  camera.start();
+  </script>
+  

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
@@ -17,7 +19,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: var(--clr-bg);
     cursor: url(assets\hand.png), auto;
 }
 
@@ -28,10 +29,9 @@
      display: inline-block;
      text-decoration: none;
      color: whitesmoke;
+     margin: 0.25em;
      border-radius: 0.25em;
      text-align: center;
-     margin-top: 200px;
-     margin-bottom: 800px;
      
      
      text-shadow: 
@@ -39,7 +39,9 @@
          0 0 0.9em currentColor;
      
      box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
-    
+     
+     position: relative;
+     margin-top: -50px;
 }
 li, a, .login {
     font-family: 'Press Start 2P';
@@ -57,7 +59,6 @@ li, a, .login {
     padding: 0;
     background-color: var(--clr-nav);
 }
-
 
 body {
     width: 100vw;
@@ -168,7 +169,44 @@ header {
     overflow: hidden;
   }
   
+  .W,
+  .E,
+  .L,
+  .C,
+  .O,
+  .M,
+  .E {
+    width: 70%;
+    height: 70%;
+  }
 
+  .W{
+    animation: fadeIn 2s ease-in-out forwards;
+  }
+
+  .E{
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  .L{
+    animation: fadeIn 4s ease-in-out forwards;
+  }
+
+  .C{
+    animation: fadeIn 5s ease-in-out forwards;
+  }
+
+  .O{
+    animation: fadeIn 6s ease-in-out forwards;
+  }
+
+  .M{
+    animation: fadeIn 7s ease-in-out forwards;
+  }
+
+  .E{
+    animation: fadeIn 8s ease-in-out forwards;
+  }
 
   .btn
  {
@@ -247,56 +285,134 @@ header {
       opacity: 1;
     }
   }
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
   
-  
-   /* .W {
-    width: 70%;
-    height: 70%;
-    position: absolute;
-    size: 2rem;
-    bottom: -50px;
-    left: -50px;
-    top: 20px;
-    right: 30px;
-    transform: rotate(-25deg);
+  .box {
+    flex-basis: calc(36.33% - 219px);
+    justify-content: center;
+    background-color: floralwhite;
+    padding: 40px;
+    margin: 15px -100px;
+    border-radius: 50px;
   }
   
-  .E {
-    width: 70%;
-    height: 70%;
-    top: -50px;
-    left: -150px;
-    transform: rotate(-30deg);
-  } */
-  
-  /* .L {
-      
-    top: 0px;
-    left: -200px;
-    transform: rotate(-15deg);
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
   }
   
-  .C {
-    top: 50px;
-    left: -150px;
-    transform: rotate(0deg);
+  .container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+  }
+
+  h2{
+      font-weight: 500;
+      font-size: 40px;
+  }
+
+  p{
+      font-size: 25px;
+  }
+
+  .table-container {
+    max-width: 1500px;
+    margin: 50px auto;
+    text-align: center;
+    border-radius: 10px;
   }
   
-  .O {
-    top: 100px;
-    left: -100px;
-    transform: rotate(15deg);
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
   }
   
-  .M {
-    top: 150px;
-    left: -50px;
-    transform: rotate(30deg);
+  th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 45px;
   }
   
-  .E {
-    top: 200px;
-    left: 0px;
-    transform: rotate(45deg);
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
   }
-    
+  
+  tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color:antiquewhite;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+  td:first-child, th:first-child {
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  .something{
+      background-color: var(--clr-bg);
+  }
+
+  .ckd{
+      font-size: 80px;
+      color: floralwhite;
+      font-weight: 300;
+  }
+
+  p{
+      font-size: 48px;
+  }
+
+  .about{
+    font-size: 40px;
+  }
+  
+  .teamimg{
+    width: 100%;
+    border-radius: 30px;
+    margin-left: 30px;
+}
+
+h2{
+    margin-left: 103px;
+    margin-top: -25px;
+}
+
+.meet{
+    font-size: 50px;
+    color: #edf0f1;
+    font-weight: 500;
+    font-family: 'Press Start 2P';
+    margin-top: 60px;
+}
+
+
+
+.a3{
+    margin-left: 50px;
+}
+
+
