@@ -309,72 +309,87 @@ const phrases = [
     "desert"
   ];
 
-const imageContainer = document.getElementById('image-container');
-const startButton = document.getElementById('start-button');
-const inputText = document.getElementById('input-text');
-const submitButton = document.getElementById('submit-button');
-const message = document.getElementById('message');
-const scoreElement = document.getElementById('score');
-let currentPhrase = '';
-let score = 0;
-
-startButton.addEventListener('click', () => {
-    startNewRound();
-});
-
-submitButton.addEventListener('click', () => {
-    if (inputText.value.toLowerCase() === currentPhrase) {
-        score++;
-        message.textContent = 'Correct! Well done!';
-        message.style.color = 'green';
-        scoreElement.textContent = score;
-        setTimeout(() => {
-            startNewRound();
-        }, 1500);
-    } else {
-        alert(`Game over! The correct word was "${currentPhrase}".`);
-        resetGame();
-    }
-});
-
-function startNewRound() {
-    startButton.disabled = true;
-    inputText.disabled = false;
-    submitButton.disabled = true; // Disable the submit button initially
-    message.textContent = '';
-    inputText.value = '';
-    inputText.focus();
-    currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    displayPhrase();
-}
-
-function displayPhrase() {
-    imageContainer.innerHTML = '';
-    let imagesDisplayed = 0;
-
-    for (let i = 0; i < currentPhrase.length; i++) {
-        const letter = currentPhrase[i].toUpperCase();
-        const img = document.createElement('img');
-        img.src = `../View/assets/${letter}.png`;
-        img.className = 'img-letter';
-        setTimeout(() => {
-            imageContainer.appendChild(img);
-            imagesDisplayed++;
-
-            if (imagesDisplayed === currentPhrase.length) {
-                submitButton.disabled = false; // Enable the submit button after all images are shown
-            }
-        }, 400 * i);
-    }
-}
-
-function resetGame() {
-    startButton.disabled = false;
-    inputText.disabled = true;
-    submitButton.disabled = true;
-    message.textContent = '';
-    inputText.value = '';
-    score = 0;
-    scoreElement.textContent = score;
-    imageContainer.innerHTML = '';
-}
+  const imageContainer = document.getElementById('image-container');
+  const startButton = document.getElementById('start-button');
+  const inputText = document.getElementById('input-text');
+  const submitButton = document.getElementById('submit-button');
+  const message = document.getElementById('message');
+  const scoreElement = document.getElementById('score');
+  const timerElement = document.getElementById('timer');
+  let currentPhrase = '';
+  let score = 0;
+  let timer;
+  
+  startButton.addEventListener('click', () => {
+      startNewRound();
+  });
+  
+  submitButton.addEventListener('click', () => {
+      if (inputText.value.toLowerCase() === currentPhrase) {
+          score++;
+          message.textContent = 'Correct! Well done!';
+          message.style.color = 'green';
+          scoreElement.textContent = `Score: ${score}`;
+          setTimeout(() => {
+              startNewRound();
+          }, 1500);
+      } else {
+          score--; // Deduct one point for an incorrect answer
+          scoreElement.textContent = `Score: ${score}`;
+          inputText.classList.add('shake');
+          setTimeout(() => {
+              inputText.classList.remove('shake');
+          }, 500);
+      }
+  });
+  
+  function startNewRound() {
+      startButton.disabled = true;
+      inputText.disabled = false;
+      submitButton.disabled = true; // Disable the submit button initially
+      message.textContent = '';
+      inputText.value = '';
+      inputText.focus();
+      currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+      displayPhrase();
+      startTimer();
+  }
+  
+  function displayPhrase() {
+      imageContainer.innerHTML = '';
+      let imagesDisplayed = 0;
+  
+      for (let i = 0; i < currentPhrase.length; i++) {
+          const letter = currentPhrase[i].toUpperCase();
+          const img = document.createElement('img');
+          img.src = `../View/assets/${letter}.png`;
+          img.className = 'img-letter';
+          setTimeout(() => {
+              imageContainer.appendChild(img);
+              imagesDisplayed++;
+  
+              if (imagesDisplayed === currentPhrase.length) {
+                  submitButton.disabled = false; // Enable the submit button after all images are shown
+              }
+          }, 400 * i);
+      }
+  }
+  
+  function startTimer() {
+      clearInterval(timer);
+      let timeRemaining = 60;
+      timerElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+      timer = setInterval(() => {
+          timeRemaining--;
+          timerElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+  
+          if (timeRemaining === 0) {
+              clearInterval(timer);
+              inputText.disabled = true;
+              submitButton.disabled = true;
+              message.textContent = `Game over! Your score is: ${score}`;
+              message.style.color = 'red';
+              startButton.disabled = false;
+          }
+      }, 1000);
+  }

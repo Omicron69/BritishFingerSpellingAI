@@ -114,11 +114,14 @@ function checkMatch() {
                     }
                 }
             } else {
+                score -= 5; // Decrease the score by 5 points for each incorrect match
+                updateScore();
+
                 firstCard.classList.add('shake');
                 secondCard.classList.add('shake');
                 setTimeout(() => {
                     firstCard.classList.remove('selected', 'shake');
-			  secondCard.classList.remove('selected', 'shake');
+                    secondCard.classList.remove('selected', 'shake');
                 }, 500);
             }
         } else {
@@ -129,6 +132,7 @@ function checkMatch() {
         }
     }
 }
+
 
 
 

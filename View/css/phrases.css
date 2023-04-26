@@ -30,6 +30,8 @@ body {
     padding: 40px;
 }
 
+
+
 h1 {
     margin-bottom: 20px;
 }
@@ -79,6 +81,21 @@ input {
     box-sizing: border-box;
     margin-bottom: 10px;
 }
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-10px);
+    }
+   
+  }  
 
 
 .Welcome-text{
