@@ -3,13 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSL Fingerspelling Matching Game Level 1</title>
+    <title>Level 1 Learning Words</title>
     <link rel="stylesheet" href="../View/css/matching.css">
 </head>
 <body>
-    <h1>BSL Fingerspelling Matching Game Level 1</h1>
-    <div class="game-board" id="game-board"></div>
-    <button id="start-button">Start Game</button>
+
+    <!-- This is the Navbar -->
+    <div class='navbar'>
+        <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+        
+        <nav>
+            <ul class="nav_links">
+                <li class="nav1"><a href="HomePage.html">Home</a></li>
+                <li><a href="Levels.html">Levels</a></li>
+                <li><a href="Handbook.html">Sign Language Handbook</a></li>
+                <li><a href="mediapipe.html">Achievements</a></li>
+            </ul>
+        </nav>
+        <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+    </div>
+
+    <div class="Welcome-text">
+        <h1>BSL FingerSpelling Letter Matching Game</h1>
+        <br>
+        <br>
+        <p>Match images with letters, turn matched items green, progress to next round upon completion.</p>
+    </div>
+    
+    <div class="container">
+        <div class="game-board" id="game-board">
+            <div class="left-side" id="left-side"></div>
+            <div class="right-side" id="right-side"></div>
+        </div>
+        <div class="Welcome-text" id="timer">Time remaining: 90 seconds</div>
+        <button class="btn" id="start-button">Start Game</button>
+    </div>
     <script src="../Controller/level1.js"></script>
 </body>
 </html>

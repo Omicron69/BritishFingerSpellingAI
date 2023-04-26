@@ -1,9 +1,15 @@
 const gameBoard = document.getElementById('game-board');
+const leftSide = document.getElementById('left-side');
+const rightSide = document.getElementById('right-side');
 const startButton = document.getElementById('start-button');
+const timerElement = document.getElementById('timer');
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const gridSize = 8;
-const totalPairs = (gridSize * gridSize) / 2;
+const lettersPerRound = 4;
+let roundLetters = [];
+let remainingLetters = alphabet.split('');
+let timeRemaining = 90;
+let timer;
 
 startButton.addEventListener('click', () => {
     startButton.disabled = true;
@@ -11,100 +17,128 @@ startButton.addEventListener('click', () => {
 });
 
 function startGame() {
-    const cards = generateCards();
-    shuffle(cards);
-    createGameBoard(cards);
+    getNextRoundLetters();
+    createGameBoard();
+    startTimer();
 }
 
-function generateCards() {
-    const cards = [];
-
-    for (let i = 0; i < totalPairs; i++) {
-        const letter = alphabet[i];
-        const imgSrc = `../View/assets/${letter}.png`;
-
-        cards.push({
-            type: 'letter',
-            content: letter,
-        });
-
-        cards.push({
-            type: 'image',
-            content: imgSrc,
-        });
-    }
-
-    return cards;
-}
-
-function shuffle(cards) {
-    for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
+function getNextRoundLetters() {
+    roundLetters = [];
+    for (let i = 0; i < lettersPerRound; i++) {
+        const index = Math.floor(Math.random() * remainingLetters.length);
+        roundLetters.push(remainingLetters[index]);
+        remainingLetters.splice(index, 1);
     }
 }
 
-function createGameBoard(cards) {
-    gameBoard.innerHTML = '';
-    let firstCard = null;
-    let secondCard = null;
-    let isFlipping = false;
+function createGameBoard() {
+    const letters = shuffle(roundLetters.slice());
+    const images = shuffle(roundLetters.slice()).map(letter => `../View/assets/${letter}.png`);
+    createSide(leftSide, images, 'image');
+    createSide(rightSide, letters, 'letter');
+}
 
-    cards.forEach((card, index) => {
+function createSide(sideElement, items, type) {
+    sideElement.innerHTML = '';
+
+    items.forEach(item => {
         const cardElement = document.createElement('div');
-        cardElement.className = 'card
+        cardElement.className = 'card';
+        cardElement.dataset.type = type;
+
+        if (type === 'letter') {
+            cardElement.textContent = item;
+        } else {
+            const img = document.createElement('img');
+            img.src = item;
+            img.style.width = '90px';
+            img.style.height = '90px';
+            img.style.backgroundColor = 'transparent';
+            cardElement.appendChild(img);
+        }
+    
         cardElement.addEventListener('click', () => {
-            if (isFlipping) return;
-            flipCard(cardElement, card);
-
-            if (!firstCard) {
-                firstCard = { cardElement, card };
-            } else {
-                secondCard = { cardElement, card };
-                isFlipping = true;
-
-                setTimeout(() => {
-                    checkMatch(firstCard, secondCard);
-                    firstCard = null;
-                    secondCard = null;
-                    isFlipping = false;
-                }, 1000);
-            }
+            cardElement.classList.add('selected');
+            checkMatch();
         });
-
-        gameBoard.appendChild(cardElement);
+    
+        sideElement.appendChild(cardElement);
     });
+    
 }
 
-function flipCard(cardElement, card) {
-    if (card.type === 'letter') {
-        cardElement.textContent = card.content;
-    } else {
-        const img = document.createElement('img');
-        img.src = card.content;
-        img.style.width = '50px';
-        img.style.height = '50px';
-        cardElement.appendChild(img);
+
+function checkMatch() {
+    const selected = document.querySelectorAll('.selected');
+    if (selected.length === 2) {
+        const [firstCard, secondCard] = selected;
+        const firstType = firstCard.dataset.type;
+        const secondType = secondCard.dataset.type;
+
+        if (firstType !== secondType) {
+            const firstContent = firstType === 'letter' ? firstCard.textContent : firstCard.querySelector('img').src.slice(-5, -4);
+            const secondContent = secondType === 'letter' ? secondCard.textContent : secondCard.querySelector('img').src.slice(-5, -4);
+
+            if (firstContent === secondContent) {
+                firstCard.classList.add('matched');
+                secondCard.classList.add('matched');
+                firstCard.classList.remove('selected');
+                secondCard.classList.remove('selected');
+                roundLetters = roundLetters.filter(letter => letter !== firstContent);
+
+                if (roundLetters.length === 0) {
+                    if (remainingLetters.length === 0) {
+                        clearInterval(timer);
+                        alert('Congratulations! You have completed all rounds.');
+                        startButton.disabled = false;
+                    } else {
+                        setTimeout(() => {
+                            getNextRoundLetters();
+                            createGameBoard();
+                            startTimer();
+                        }, 1000);
+                    }
+                }
+            } else {
+                setTimeout(() => {
+                    firstCard.classList.remove('selected');
+                    secondCard.classList.remove('selected');
+                }, 500);
+            }
+        } else {
+            setTimeout(() => {
+                firstCard.classList.remove('selected');
+                secondCard.classList.remove('selected');
+            }, 500);
+        }
     }
-    cardElement.style.backgroundColor = 'white';
-    cardElement.style.color = 'black';
 }
 
-function checkMatch(firstCard, secondCard) {
-    if (firstCard.card.type === secondCard.card.type) {
-        unflipCards(firstCard.cardElement, secondCard.cardElement);
-    } else if (firstCard.card.content === secondCard.card.content) {
-        firstCard.cardElement.style.visibility = 'hidden';
-        secondCard.cardElement.style.visibility = 'hidden';
-    } else {
-        unflipCards(firstCard.cardElement, secondCard.cardElement);
+
+
+
+//This function i used to get timerss
+function startTimer() {
+clearInterval(timer);
+timeRemaining = 90;
+timerElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+timer = setInterval(() => {
+    timeRemaining--;
+    timerElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+
+    if (timeRemaining === 0) {
+        clearInterval(timer);
+        alert('Time is up! Game over.');
+        startButton.disabled = false;
     }
+}, 1000);
 }
 
-function unflipCards(...cardElements) {
-    cardElements.forEach((cardElement) => {
-        cardElement.innerHTML = '';
-        cardElement.style.backgroundColor = '#4CAF50';
-        cardElement.style.color = 'white';
-    });
+//I used this function to get random images and letters always
+function shuffle(array) {
+for (let i = array.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
+}
+return array;
 }

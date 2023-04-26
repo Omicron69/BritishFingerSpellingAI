@@ -7,14 +7,38 @@
     <link rel="stylesheet" href="../View/css/phrases.css">
 </head>
 <body>
-    <h1>BSL Words Game Level 2 </h1>
-    <h2>FingerSpelling Letters will be shown one by one to form a word try guessing the word to earn a point</h2>
-    <p>Your Score: <span id="score">0</span></p>
+
+     <!-- This is the Navbar -->
+     <div class='navbar'>
+        <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+        
+        <nav>
+            <ul class="nav_links">
+                <li class="nav1"><a href="HomePage.html">Home</a></li>
+                <li><a href="Levels.html">Levels</a></li>
+                <li><a href="Handbook.html">Sign Language Handbook</a></li>
+                <li><a href="mediapipe.html">Achievements</a></li>
+            </ul>
+        </nav>
+        <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+    </div>
+
+    <div class="Welcome-text">
+        <h1>BSL Words Game Level 2 </h1>
+        <br>
+        <p>FingerSpelling Letters will be shown one by one to form a word try guessing the word to earn a point</p>
+    </div>
+   
+    <div class="score-text">
+        <p>Your Score: <span id="score">0</span></p>
+    </div>
     <div class="container" id="image-container"></div>
     <button id="start-button">Start Game</button>
     <input type="text" id="input-text" placeholder="Type the word here..." disabled>
     <button id="submit-button" disabled>Submit</button>
-    <p id="message"></p>
+    <div class="congrats">
+        <p id="message"></p>
+    </div>
     <script src="../Controller/level2.js"></script>
 </body>
 </html>
