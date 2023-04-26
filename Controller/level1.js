@@ -6,7 +6,11 @@ const timerElement = document.getElementById('timer');
 const scoreElement = document.getElementById('score');
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const lettersPerRound = 4;
+const highScoreElement = document.getElementById('high-score');
 
+
+let highScore = 0;
+let highScorer = '';
 let score = 0;
 let roundLetters = [];
 let remainingLetters = alphabet.split('');
@@ -90,6 +94,7 @@ function checkMatch() {
             const firstContent = firstType === 'letter' ? firstCard.textContent : firstCard.querySelector('img').src.slice(-5, -4);
             const secondContent = secondType === 'letter' ? secondCard.textContent : secondCard.querySelector('img').src.slice(-5, -4);
 
+
             if (firstContent === secondContent) {
                 score += 10; // Increase the score by 10 points for each correct match
                 updateScore();
@@ -114,14 +119,14 @@ function checkMatch() {
                     }
                 }
             } else {
-                score -= 5; // Decrease the score by 5 points for each incorrect match
+                score -= 5;
                 updateScore();
 
-                firstCard.classList.add('shake');
-                secondCard.classList.add('shake');
+                firstCard.classList.add('shake', 'incorrect');
+                secondCard.classList.add('shake', 'incorrect');
                 setTimeout(() => {
-                    firstCard.classList.remove('selected', 'shake');
-                    secondCard.classList.remove('selected', 'shake');
+                    firstCard.classList.remove('selected', 'shake', 'incorrect');
+                    secondCard.classList.remove('selected', 'shake', 'incorrect');
                 }, 500);
             }
         } else {

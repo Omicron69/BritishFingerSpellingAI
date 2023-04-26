@@ -43,6 +43,11 @@
      margin-top: 100px;
 }
 
+.card.incorrect {
+    background-color: red;
+  }
+  
+
 li, a, .login {
     font-family: 'Press Start 2P';
     font-weight: 400;
