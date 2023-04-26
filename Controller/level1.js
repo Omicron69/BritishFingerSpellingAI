@@ -32,12 +32,15 @@ function updateScore() {
 
 function getNextRoundLetters() {
     roundLetters = [];
-    for (let i = 0; i < lettersPerRound; i++) {
+    const lettersToDraw = Math.min(lettersPerRound, remainingLetters.length); // Calculate the number of letters to draw
+
+    for (let i = 0; i < lettersToDraw; i++) {
         const index = Math.floor(Math.random() * remainingLetters.length);
         roundLetters.push(remainingLetters[index]);
         remainingLetters.splice(index, 1);
     }
 }
+
 
 function createGameBoard() {
     const letters = shuffle(roundLetters.slice());
