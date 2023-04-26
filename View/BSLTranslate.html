@@ -7,10 +7,28 @@
     <link rel="stylesheet" href="../View/css/BSL.css">
 </head>
 <body>
-    <h1>BSL Translator</h1>
-    <input type="text" id="input-text" placeholder="Type here...">
-    <button id="submit-button">Translate</button>
+
+    <div class='navbar'>
+        <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+        
+        <nav>
+            <ul class="nav_links">
+                <li class="nav1"><a href="HomePage.html">Home</a></li>
+                <li><a href="Levels.html">Levels</a></li>
+                <li><a href="Handbook.html">Sign Language Handbook</a></li>
+                <li><a href="mediapipe.html">Achievements</a></li>
+            </ul>
+        </nav>
+        <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+    </div>
+
+    <div class="Welcome-text">
+        <h1>BSL Translator</h1>
+        <p>Type in your desired text and it will show which FingerSpelling letter your need step by step</p>
+    </div>
     <div class="container" id="image-container"></div>
+    <input type="text" id="input-text" placeholder="Type here...">
+    <button class='btn' id="submit-button">Translate</button>
     <script src="../Controller/translate.js"></script>
 </body>
 </html>

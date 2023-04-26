@@ -18,7 +18,7 @@
     margin: 0;
     padding: 0;
     background-color: var(--clr-bg);
-    cursor: url(assets\hand.png), auto;
+    cursor: url(../assets/micky.png), auto;
 }
 
 .Welcome-text{
@@ -209,7 +209,7 @@ header {
 
   .btn
  {
-     font-size: 1.9rem;
+     font-size: 1.2rem;
      font-family: 'Press Start 2P', cursive;
      background-color: transparent;
      display: inline-block;
