@@ -3,13 +3,17 @@ const leftSide = document.getElementById('left-side');
 const rightSide = document.getElementById('right-side');
 const startButton = document.getElementById('start-button');
 const timerElement = document.getElementById('timer');
-
+const scoreElement = document.getElementById('score');
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const lettersPerRound = 4;
+
+let score = 0;
 let roundLetters = [];
 let remainingLetters = alphabet.split('');
-let timeRemaining = 90;
+let timeRemaining = 60;
 let timer;
+
+
 
 startButton.addEventListener('click', () => {
     startButton.disabled = true;
@@ -20,6 +24,10 @@ function startGame() {
     getNextRoundLetters();
     createGameBoard();
     startTimer();
+}
+
+function updateScore() {
+    scoreElement.textContent = `Score: ${score}`;
 }
 
 function getNextRoundLetters() {
@@ -80,6 +88,9 @@ function checkMatch() {
             const secondContent = secondType === 'letter' ? secondCard.textContent : secondCard.querySelector('img').src.slice(-5, -4);
 
             if (firstContent === secondContent) {
+                score += 10; // Increase the score by 10 points for each correct match
+                updateScore();
+
                 firstCard.classList.add('matched');
                 secondCard.classList.add('matched');
                 firstCard.classList.remove('selected');
@@ -100,9 +111,11 @@ function checkMatch() {
                     }
                 }
             } else {
+                firstCard.classList.add('shake');
+                secondCard.classList.add('shake');
                 setTimeout(() => {
-                    firstCard.classList.remove('selected');
-                    secondCard.classList.remove('selected');
+                    firstCard.classList.remove('selected', 'shake');
+			  secondCard.classList.remove('selected', 'shake');
                 }, 500);
             }
         } else {
@@ -120,7 +133,7 @@ function checkMatch() {
 //This function i used to get timerss
 function startTimer() {
 clearInterval(timer);
-timeRemaining = 90;
+timeRemaining = 60;
 timerElement.textContent = `Time remaining: ${timeRemaining} seconds`;
 timer = setInterval(() => {
     timeRemaining--;
