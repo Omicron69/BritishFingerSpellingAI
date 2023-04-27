@@ -136,8 +136,8 @@ button:hover {
 }
 
 .img-letter {
-    width: 50px;
-    height: 50px;
+    width: 130px;
+    height: 150px;
     margin-bottom: 10px;
     background-color: transparent;
 }
@@ -254,7 +254,7 @@ header {
   }
 
   .Welcome-text{
-    font-size: 20px;
+    font-size: 25px;
     font-family: 'Press Start 2P';
     background-color: transparent;
     display: inline-block;

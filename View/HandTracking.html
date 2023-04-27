@@ -49,7 +49,7 @@
 </body>
 </html>
 
-
+//
 <script type="module">
   const videoElement = document.getElementsByClassName('input_video')[0];
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
@@ -80,6 +80,8 @@
     return indexMiddleSeparated && ringPinkyTogether;
   }
 
+
+//This was edited through the mediapipe and tensorflow examples that I edited to suit my needs
   function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -98,7 +100,7 @@
         if (detectedPeaceSign) break;
       }
 
-      //This is for console log
+      //This is for console log to check if the numbers I put is right enough
       console.log(JSON.stringify(results.multiHandLandmarks, null, 2));
 
       if (results.multiHandLandmarks.length === 1) {

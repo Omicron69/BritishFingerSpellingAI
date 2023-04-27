@@ -97,7 +97,7 @@
     left: 0;
     top: 0;
     border-radius: 100px;
-    margin-top: 300px;
+    margin-top: 250px;
   }
   
   .logo {
@@ -249,7 +249,7 @@
   box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
   
   position: relative;
-  margin-top: 640px;
+  margin-top: 440px;
   margin-left: 960px;
 }
 

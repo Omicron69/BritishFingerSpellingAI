@@ -270,6 +270,7 @@ body {
     text-align: center;
 }
 
+/* I used this to make the shaking effect when answered wrong */
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -303,14 +304,14 @@ body {
     max-width: 800px;
     font-size: 20px;
      font-family: 'Press Start 2P';
-     color: whitesmoke;
+     color: black;
 }
 
 .left-side, .right-side {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 50%;
+    width: 800px;
 }
 
 .card {
@@ -322,13 +323,16 @@ body {
     align-items: center;
     margin: 5px;
     cursor: pointer;
+    background-color: whitesmoke;
 }
 .img{
     background-color: transparent;
+    width: 800px;
+    height: 800px;
 }
 
 .card.selected {
-    background-color: lightblue;
+    background-color: #fff3cd;
     border-radius: 50px;
 }
 

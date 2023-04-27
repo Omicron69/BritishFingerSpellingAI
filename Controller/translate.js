@@ -1,10 +1,10 @@
-const inputText = document.getElementById('input-text');
-const submitButton = document.getElementById('submit-button');
-const imageContainer = document.getElementById('image-container');
+const inputText = document.getElementById('textbox');
+const translateButton = document.getElementById('translatebtn');
+const imageBox = document.getElementById('imagebox');
 
-submitButton.addEventListener('click', () => {
+translateButton.addEventListener('click', () => {
     const text = inputText.value.toUpperCase();
-    imageContainer.innerHTML = '';
+    imageBox.innerHTML = '';
 
     for (const letter of text) {
         if (letter.match(/[A-Z]/)) {
@@ -22,7 +22,7 @@ submitButton.addEventListener('click', () => {
             label.className = 'letter-label';
             box.appendChild(label);
 
-            imageContainer.appendChild(box);
+            imageBox.appendChild(box);
         }
     }
 });

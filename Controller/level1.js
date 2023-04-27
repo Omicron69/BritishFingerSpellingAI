@@ -108,7 +108,7 @@ function checkMatch() {
                 if (roundLetters.length === 0) {
                     if (remainingLetters.length === 0) {
                         clearInterval(timer);
-                        alert('Congratulations! You have completed all rounds.');
+                        alert('Congratsss You Learned all the alphabets!.');
                         startButton.disabled = false;
                     } else {
                         setTimeout(() => {

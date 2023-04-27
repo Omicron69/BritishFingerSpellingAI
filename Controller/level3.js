@@ -308,27 +308,27 @@ const words = [
     "valley",
     "desert"
   ];
-const wordDisplay = document.getElementById("word-display");
-const wordContainer = document.getElementById("word-container");
+const showWord = document.getElementById("theword");
+const AnswerBox = document.getElementById("answerBox");
 const imageContainer = document.getElementById("image-container");
 const selectedWord = words[Math.floor(Math.random() * words.length)];
-const wordLength = selectedWord.length;
-const letterSlots = [];
+const LengthofWord = selectedWord.length;
+const answerSlots = [];
 
 
-wordDisplay.textContent = `Selected word: ${selectedWord}`;
+showWord.textContent = `Selected word: ${selectedWord}`;
 
-for (let i = 0; i < wordLength; i++) {
+for (let i = 0; i < LengthofWord; i++) {
   const slot = document.createElement("div");
   slot.className = "word-slot";
-  wordContainer.appendChild(slot);
-  letterSlots.push(slot);
+  AnswerBox.appendChild(slot);
+  answerSlots.push(slot);
 }
 
-const shuffledAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
-const imagesToDisplay = Array.from(new Set([...selectedWord.toUpperCase(), ...shuffledAlphabet])).slice(0, 10);
+const randomAtoZgen = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
+const randomImageGen = Array.from(new Set([...selectedWord.toUpperCase(), ...randomAtoZgen])).slice(0, 10);
 
-for (const letter of imagesToDisplay) {
+for (const letter of randomImageGen) {
   const img = document.createElement("img");
   img.src = `../View/assets/${letter}.png`;
   img.className = "img-letter";
@@ -339,17 +339,17 @@ for (const letter of imagesToDisplay) {
   imageContainer.appendChild(img);
 }
 
-wordContainer.addEventListener("dragover", (e) => {
+AnswerBox.addEventListener("dragover", (e) => {
   e.preventDefault();
 });
 
-wordContainer.addEventListener("drop", (e) => {
+AnswerBox.addEventListener("drop", (e) => {
   e.preventDefault();
   const letter = e.dataTransfer.getData("text/plain");
   const target = e.target;
 
   if (target.classList.contains("word-slot")) {
-    const index = letterSlots.indexOf(target);
+    const index = answerSlots.indexOf(target);
 
     if (selectedWord.toUpperCase()[index] === letter) {
       target.innerHTML = letter;
@@ -360,23 +360,23 @@ wordContainer.addEventListener("drop", (e) => {
   }
 });
 
-wordContainer.addEventListener("dragover", (e) => {
+AnswerBox.addEventListener("dragover", (e) => {
     e.preventDefault();
   });
   
-  wordContainer.addEventListener("dragenter", (e) => {
+  AnswerBox.addEventListener("dragenter", (e) => {
     if (e.target.classList.contains("word-slot")) {
       e.target.classList.add("drop-zone");
     }
   });
   
-  wordContainer.addEventListener("dragleave", (e) => {
+  AnswerBox.addEventListener("dragleave", (e) => {
     if (e.target.classList.contains("word-slot")) {
       e.target.classList.remove("drop-zone");
     }
   });
   
-  wordContainer.addEventListener("drop", (e) => {
+  AnswerBox.addEventListener("drop", (e) => {
     e.preventDefault();
     e.stopPropagation();
   
@@ -386,7 +386,7 @@ wordContainer.addEventListener("dragover", (e) => {
     if (target.classList.contains("word-slot")) {
       target.classList.remove("drop-zone");
   
-      const index = letterSlots.indexOf(target);
+      const index = answerSlots.indexOf(target);
   
       if (selectedWord.toUpperCase()[index] === letter) {
         const img = document.createElement("img");
