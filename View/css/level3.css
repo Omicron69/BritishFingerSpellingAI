@@ -40,7 +40,7 @@
      box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
      
      position: relative;
-     margin-top: -50px;
+     margin-top: 80px;
 }
 li, a, .login {
     font-family: 'Press Start 2P';
@@ -75,20 +75,25 @@ body {
 }
 
 .word-slot {
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--clr-neon);
+    border-radius: 50px;
     margin: 5px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .img-letter {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     margin: 5px;
     cursor: grab;
+    border: 4px solid var(--clr-neon);
+    background-color: whitesmoke;
+    border-radius: 50px;
 }
 
 .word-slot.shake {
@@ -133,17 +138,6 @@ header {
 }
 
 
-/* .nav_links {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-
-} */
 .navbar .nav_links {
     display: flex;
     list-style: none;
