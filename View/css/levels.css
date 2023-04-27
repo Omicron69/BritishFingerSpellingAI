@@ -21,6 +21,10 @@
     cursor: url(assets\hand.png), auto;
 }
 
+.button-container{
+  flex: auto;
+}
+
 .Welcome-text{
      font-size: 20px;
      font-family: 'Press Start 2P';
@@ -30,8 +34,7 @@
      color: whitesmoke;
      border-radius: 0.25em;
      text-align: center;
-     margin-top: 200px;
-     margin-bottom: 800px;
+     margin-top: 100px;
      
      
      text-shadow: 
@@ -169,10 +172,10 @@ header {
   }
   
 
-
+ /* Button 1 Css  */
   .btn
  {
-     font-size: 1.9rem;
+     font-size: 1.2rem;
      font-family: 'Press Start 2P', cursive;
      background-color: transparent;
      display: inline-block;
@@ -181,7 +184,7 @@ header {
      color: var(--clr-neon);
      border: var(--clr-neon) 0.125em solid;
      padding: 1.0em 1.3em;
-     margin: 0.25em;
+     margin-top: 80px;
      border-radius: 0.25em;
      
      
@@ -248,6 +251,218 @@ header {
     }
   }
   
+  /* Button 2 Css */
+  .btn2
+ {
+     font-size: 1.2rem;
+     font-family: 'Press Start 2P', cursive;
+     background-color: transparent;
+     display: inline-block;
+     cursor: pointer;
+     text-decoration: none;
+     color: var(--clr-neon);
+     border: var(--clr-neon) 0.125em solid;
+     padding: 1.0em 1.3em;
+     margin-top: 80px;
+     border-radius: 0.25em;
+     
+     
+     text-shadow: 
+         0 0 0.125em hsl(0 0% 100%/ 0.5),
+         0 0 0.45em currentColor;
+     
+     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     
+     position: relative;
+        
+ }
+ 
+ .btn2::before{
+     pointer-events: none;
+     content: '';
+     position: absolute;
+     background: var(--clr-neon);
+     top: 90%;
+     left: 0%;
+     width: 100%;
+     height: 100%;
+     
+     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+     filter: blur(1em);
+     opacity: 0.7;
+         
+ }
+ 
+ .btn2::after{
+     
+     content:'';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     box-shadow: 0 0 2em 0.5em var(--clr-neon);
+     opacity: 0;
+     transition: opacity 100ms linear;
+     
+ }
+ 
+ 
+ .btn2:hover,
+ .btn2:focus
+ {
+     background: var(--clr-neon);
+     color: var(--clr-bg);
+     text-shadow: none;
+     
+ }
+ 
+ .btn2:hover::after{
+     opacity: 1;
+ }
+
+
+  /* Button 3 CSS */
+
+  .btn3
+  {
+      font-size: 1.2rem;
+      font-family: 'Press Start 2P', cursive;
+      background-color: transparent;
+      display: inline-block;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--clr-neon);
+      border: var(--clr-neon) 0.125em solid;
+      padding: 1.0em 1.3em;
+      margin-top: 80px;
+      border-radius: 0.25em;
+      
+      
+      text-shadow: 
+          0 0 0.125em hsl(0 0% 100%/ 0.5),
+          0 0 0.45em currentColor;
+      
+      box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+      
+      position: relative;
+         
+  }
+  
+  .btn3::before{
+      pointer-events: none;
+      content: '';
+      position: absolute;
+      background: var(--clr-neon);
+      top: 90%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      
+      transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+      filter: blur(1em);
+      opacity: 0.7;
+          
+  }
+  
+  .btn3::after{
+      
+      content:'';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      box-shadow: 0 0 2em 0.5em var(--clr-neon);
+      opacity: 0;
+      transition: opacity 100ms linear;
+      
+  }
+  
+  
+  .btn3:hover,
+  .btn3:focus
+  {
+      background: var(--clr-neon);
+      color: var(--clr-bg);
+      text-shadow: none;
+      
+  }
+  
+  .btn3:hover::after{
+      opacity: 1;
+  }
+
+
+  /* Button 4 CSS */
+  .btn4
+ {
+     font-size: 1.2rem;
+     font-family: 'Press Start 2P', cursive;
+     background-color: transparent;
+     display: inline-block;
+     cursor: pointer;
+     text-decoration: none;
+     color: var(--clr-neon);
+     border: var(--clr-neon) 0.125em solid;
+     padding: 1.0em 1.3em;
+     margin-top: 80px;
+     border-radius: 0.25em;
+     
+     
+     text-shadow: 
+         0 0 0.125em hsl(0 0% 100%/ 0.5),
+         0 0 0.45em currentColor;
+     
+     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     
+     position: relative;
+        
+ }
+ 
+ .btn4::before{
+     pointer-events: none;
+     content: '';
+     position: absolute;
+     background: var(--clr-neon);
+     top: 90%;
+     left: 0%;
+     width: 100%;
+     height: 100%;
+     
+     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+     filter: blur(1em);
+     opacity: 0.7;
+         
+ }
+ 
+ .btn4::after{
+     
+     content:'';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     box-shadow: 0 0 2em 0.5em var(--clr-neon);
+     opacity: 0;
+     transition: opacity 100ms linear;
+     
+ }
+ 
+ 
+ .btn4:hover,
+ .btn4:focus
+ {
+     background: var(--clr-neon);
+     color: var(--clr-bg);
+     text-shadow: none;
+     
+ }
+ 
+ .btn4:hover::after{
+     opacity: 1;
+ }
   
    /* .W {
     width: 70%;
