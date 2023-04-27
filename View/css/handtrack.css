@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root{
+    --clr-neon: hsl(317 100% 54%);
+    --clr-bg: hsl(323 21% 16%);
+    --clr-nav: rgb(0, 0, 0);
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--clr-bg);
+    cursor: url(../assets/micky.png), auto;
+}
+
+
+
 @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -18,6 +43,8 @@
       color: lightblue;
     }
   }
+
+  
   
   body {
     bottom: 0;
@@ -69,6 +96,8 @@
     position: relative;
     left: 0;
     top: 0;
+    border-radius: 100px;
+    margin-top: 300px;
   }
   
   .logo {
@@ -135,3 +164,285 @@
     font-size: 24px;
     position: absolute;
   }
+
+
+.flex-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  margin-top: 500px;
+
+}
+
+.video-box {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 50%;
+}
+
+.letter-image {
+  width: 270px;
+  height: 642px;
+  margin-bottom: 20px;
+  background-color: aliceblue;
+  border-radius: 23px;
+}
+
+.your-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 15px 32px;
+}
+
+
+.Welcome-text{
+     font-size: 20px;
+     font-family: 'Press Start 2P';
+     background-color: transparent;
+     display: inline-block;
+     text-decoration: none;
+     color: whitesmoke;
+     margin: 0.25em;
+     border-radius: 0.25em;
+     text-align: center;
+     
+     
+     text-shadow: 
+         0 0 0.125em hsl(0 0% 100%/ 0.5),
+         0 0 0.9em currentColor;
+     
+     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     
+     position: relative;
+     margin-top: 100px;
+}
+
+.Welcome-text2{
+  font-size: 20px;
+  font-family: 'Press Start 2P';
+  background-color: transparent;
+  display: inline-block;
+  text-decoration: none;
+  color: whitesmoke;
+  margin: 0.25em;
+  border-radius: 0.25em;
+  text-align: center;
+  
+  
+  text-shadow: 
+      0 0 0.125em hsl(0 0% 100%/ 0.5),
+      0 0 0.9em currentColor;
+  
+  box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+  
+  position: relative;
+  margin-top: 640px;
+  margin-left: 960px;
+}
+
+li, a, .login {
+    font-family: 'Press Start 2P';
+    font-weight: 400;
+    font-size: 20px;
+    color: #edf0f1;
+    text-decoration: none;
+    background-color: var(--clr-nav);
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+    background-color: var(--clr-nav);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Dongle', sans-serif;
+}
+
+.nav1{
+    border-bottom: 5px solid var(--clr-neon) ;
+    
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+}
+
+.logo {
+    cursor: pointer;
+    width: 150px;
+    margin-left: 20px;
+    margin-top: 5px;
+    background-color: transparent;
+    
+}
+
+.navbar .nav_links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 15px;
+    justify-content: center;
+}
+
+.nav_links li a {
+    transition: all 0.1s ease 0s;
+}
+
+.nav_links li a:hover {
+    color: var(--clr-neon);
+    border-bottom: 5px solid var(--clr-neon) ;
+    cursor: pointer;
+}
+
+.login{
+    font-size: 0.9rem;
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    padding: 0.25em 1.3em;
+    border-radius: 0.25em;
+    
+    
+    text-shadow: 
+        0 0 0.125em hsl(0 0% 100%/ 0.5),
+        0 0 0.45em currentColor;
+    
+    box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+    
+    position: relative;
+}
+
+.login:hover{
+    background: var(--clr-neon);
+    color: var(--clr-bg);
+    text-shadow: none;
+}
+
+.bottom {
+    display: flex;
+    overflow: hidden;
+  }
+  
+
+  .btn
+ {
+     font-size: 1.2rem;
+     font-family: 'Press Start 2P', cursive;
+     background-color: transparent;
+     display: inline-block;
+     cursor: pointer;
+     text-decoration: none;
+     color: var(--clr-neon);
+     border: var(--clr-neon) 0.125em solid;
+     padding: 1.0em 1.3em;
+     margin: 0.25em;
+     border-radius: 0.25em;
+     
+     
+     text-shadow: 
+         0 0 0.125em hsl(0 0% 100%/ 0.5),
+         0 0 0.45em currentColor;
+     
+     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     
+     position: relative;
+        
+ }
+ 
+ .btn::before{
+     pointer-events: none;
+     content: '';
+     position: absolute;
+     background: var(--clr-neon);
+     top: 90%;
+     left: 0%;
+     width: 100%;
+     height: 100%;
+     
+     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+     filter: blur(1em);
+     opacity: 0.7;
+         
+ }
+ 
+ .btn::after{
+     
+     content:'';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     box-shadow: 0 0 2em 0.5em var(--clr-neon);
+     opacity: 0;
+     transition: opacity 100ms linear;
+     
+ }
+ 
+ 
+ .btn:hover,
+ .btn:focus
+ {
+     background: var(--clr-neon);
+     color: var(--clr-bg);
+     text-shadow: none;
+     
+ }
+ 
+ .btn:hover::after{
+     opacity: 1;
+ }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

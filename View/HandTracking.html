@@ -9,34 +9,106 @@
 </head>
 
 <body>
+
+    <!-- This is the Navbar -->
+    <div class='navbar'>
+      <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+      
+      <nav>
+          <ul class="nav_links">
+              <li><a href="HomePage.html">Home</a></li>
+              <li class="nav1"><a href="Levels.html">Levels</a></li>
+              <li><a href="../View/Handbook.html">Sign Language Handbook</a></li>
+              <li><a href="#">Achievements</a></li>
+          </ul>
+      </nav>
+      <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+  </div>
+      
+
+  <div class= "Welcome-text">
+      <h1>Practice FingerSpelling With Webcam</h1>
+      <br>
+      <p>Try practicing the word Peace Sign</p>
+  </div>
+
   <link rel="stylesheet" href="../View/css/handtrack.css">
   <div class="container">
-    <video class="input_video"></video>
-    <canvas class="output_canvas" width="1920px" height="1080px"></canvas>
+    <div class="flex-box">
+      <img src="../View/assets/peacesign.png" alt="Peace Sign" class="letter-image">
+      <button class="btn">Go Back</button>
+    </div>
+    <div class="video-box">
+      <video class="input_video"></video>
+      <canvas class="output_canvas" width="1920px" height="1080px"></canvas>
+    </div>
+  </div>
+  <div class= "Welcome-text2">
+    <p>Accuracy: <span id="accuracy">0%</span></p>
   </div>
 </body>
 </html>
+
 
 <script type="module">
   const videoElement = document.getElementsByClassName('input_video')[0];
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
   const canvasCtx = canvasElement.getContext('2d');
-  
+
+//This is borrowed from Mediapipe Hand Documentation for testing purposes
+  function isPeaceSign(landmarks) {
+    const indexTip = landmarks[8];
+    const middleTip = landmarks[12];
+    const ringTip = landmarks[16];
+    const pinkyTip = landmarks[20];
+
+    const indexDistToMiddle = Math.hypot(
+      indexTip.x - middleTip.x,
+      indexTip.y - middleTip.y,
+      indexTip.z - middleTip.z
+    );
+
+    const ringDistToPinky = Math.hypot(
+      ringTip.x - pinkyTip.x,
+      ringTip.y - pinkyTip.y,
+      ringTip.z - pinkyTip.z
+    );
+
+    const indexMiddleSeparated = indexDistToMiddle > 0.05;
+    const ringPinkyTogether = ringDistToPinky < 0.05;
+
+    return indexMiddleSeparated && ringPinkyTogether;
+  }
+
   function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
     canvasCtx.drawImage(
-        results.image, 0, 0, canvasElement.width, canvasElement.height);
+      results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiHandLandmarks) {
+      let detectedPeaceSign = false;
       for (const landmarks of results.multiHandLandmarks) {
         drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-                       {color: '#b042ff', lineWidth: 8});
-        drawLandmarks(canvasCtx, landmarks, {color: '#ff2400', lineWidth: 2});
+          { color: '#b042ff', lineWidth: 8 });
+        drawLandmarks(canvasCtx, landmarks, { color: '#ff2400', lineWidth: 2 });
+
+        detectedPeaceSign = isPeaceSign(landmarks);
+        if (detectedPeaceSign) break;
+      }
+
+      //This is for console log
+      console.log(JSON.stringify(results.multiHandLandmarks, null, 2));
+
+      if (results.multiHandLandmarks.length === 1) {
+        const accuracyText = document.getElementById("accuracy");
+        accuracyText.textContent = detectedPeaceSign ? "100%" : "0%";
       }
     }
     canvasCtx.restore();
   }
-  
+
   const hands = new Hands({locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
   }});
@@ -47,7 +119,7 @@
     minTrackingConfidence: 0.5
   });
   hands.onResults(onResults);
-  
+
   const camera = new Camera(videoElement, {
     onFrame: async () => {
       await hands.send({image: videoElement});
@@ -56,5 +128,8 @@
     height: 1080
   });
   camera.start();
-  </script>
+</script>
+
+
+
   
