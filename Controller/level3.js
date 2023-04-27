@@ -325,8 +325,14 @@ for (let i = 0; i < LengthofWord; i++) {
   answerSlots.push(slot);
 }
 
+//This uses split functionality to randomize the letters and show results on screen
 const randomAtoZgen = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
 const randomImageGen = Array.from(new Set([...selectedWord.toUpperCase(), ...randomAtoZgen])).slice(0, 10);
+
+//Was having an error where the images where already showing in order so this fixes it by shuffling the images again 
+const shuffleImageAgain = randomImageGen.sort(() => Math.random() - 0.5);
+console.log(shuffleImageAgain);
+console.log(randomImageGen)
 
 for (const letter of randomImageGen) {
   const img = document.createElement("img");
