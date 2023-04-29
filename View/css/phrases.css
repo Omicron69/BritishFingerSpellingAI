@@ -55,8 +55,10 @@ h1 {
 }
 
 button {
-    font-size: 1.2em;
-    padding: 5px 10px;
+    font-size: 1.4em;
+    font-family: "Press Start 2P";
+    padding: 30px 70px;
+    border-radius: 50px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -74,12 +76,72 @@ button:disabled {
 }
 
 input {
-    font-size: 1.2em;
-    padding: 5px 10px;
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+   font-family: 'Press Start 2P', cursive;
+   background-color: transparent;
+   display: inline-block;
+   cursor: pointer;
+   text-decoration: none;
+   color: var(--clr-neon);
+   border: var(--clr-neon) 0.125em solid;
+   padding: 1.0em 1.3em;
+   margin: 0.25em;
+   border-radius: 3.25em;
+   
+   
+   
+   box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+   
+   position: relative;
+}
+
+.input::before{
+  pointer-events: none;
+   content: '';
+   position: absolute;
+   background: var(--clr-neon);
+   top: 90%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   
+   transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+   filter: blur(1em);
+   opacity: 0.7;
+}
+
+.input::after{
+   
+  content:'';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 2em 0.5em var(--clr-neon);
+  opacity: 0;
+  transition: opacity 100ms linear;
+  
+}
+
+
+.input:hover,
+.input:focus
+{
+  background: var(--clr-neon);
+  color: var(--clr-bg);
+  text-shadow: none;
+  
+}
+
+.input:hover::after{
+  opacity: 1;
 }
 
 .shake {
@@ -143,6 +205,28 @@ input {
 }
 
 .congrats{
+    font-size: 30px;
+     font-family: 'Press Start 2P';
+     background-color: transparent;
+     display: inline-block;
+     text-decoration: none;
+     color: whitesmoke;
+     margin: 0.25em;
+     border-radius: 0.25em;
+     text-align: center;
+     
+     
+     text-shadow: 
+         0 0 0.125em hsl(0 0% 100%/ 0.5),
+         0 0 0.9em currentColor;
+     
+     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     
+     position: relative;
+     margin-top: 20px;
+}
+
+.congrats1{
     font-size: 30px;
      font-family: 'Press Start 2P';
      background-color: transparent;
@@ -290,171 +374,5 @@ header {
     overflow: hidden;
   }
   
-  .W,
-  .E,
-  .L,
-  .C,
-  .O,
-  .M,
-  .E {
-    width: 70%;
-    height: 70%;
-  }
-
-  .W{
-    animation: fadeIn 2s ease-in-out forwards;
-  }
-
-  .E{
-    animation: fadeIn 1s ease-in-out forwards;
-  }
-
-  .L{
-    animation: fadeIn 4s ease-in-out forwards;
-  }
-
-  .C{
-    animation: fadeIn 5s ease-in-out forwards;
-  }
-
-  .O{
-    animation: fadeIn 6s ease-in-out forwards;
-  }
-
-  .M{
-    animation: fadeIn 7s ease-in-out forwards;
-  }
-
-  .E{
-    animation: fadeIn 8s ease-in-out forwards;
-  }
-
-  .btn
- {
-     font-size: 1.9rem;
-     font-family: 'Press Start 2P', cursive;
-     background-color: transparent;
-     display: inline-block;
-     cursor: pointer;
-     text-decoration: none;
-     color: var(--clr-neon);
-     border: var(--clr-neon) 0.125em solid;
-     padding: 1.0em 1.3em;
-     margin: 0.25em;
-     border-radius: 0.25em;
-     
-     
-     text-shadow: 
-         0 0 0.125em hsl(0 0% 100%/ 0.5),
-         0 0 0.45em currentColor;
-     
-     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
-     
-     position: relative;
-        
- }
  
- .btn::before{
-     pointer-events: none;
-     content: '';
-     position: absolute;
-     background: var(--clr-neon);
-     top: 90%;
-     left: 0%;
-     width: 100%;
-     height: 100%;
-     
-     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-     filter: blur(1em);
-     opacity: 0.7;
-         
- }
- 
- .btn::after{
-     
-     content:'';
-     position: absolute;
-     top: 0;
-     bottom: 0;
-     left: 0;
-     right: 0;
-     box-shadow: 0 0 2em 0.5em var(--clr-neon);
-     opacity: 0;
-     transition: opacity 100ms linear;
-     
- }
- 
- 
- .btn:hover,
- .btn:focus
- {
-     background: var(--clr-neon);
-     color: var(--clr-bg);
-     text-shadow: none;
-     
- }
- 
- .btn:hover::after{
-     opacity: 1;
- }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-  
-   /* .W {
-    width: 70%;
-    height: 70%;
-    position: absolute;
-    size: 2rem;
-    bottom: -50px;
-    left: -50px;
-    top: 20px;
-    right: 30px;
-    transform: rotate(-25deg);
-  }
-  
-  .E {
-    width: 70%;
-    height: 70%;
-    top: -50px;
-    left: -150px;
-    transform: rotate(-30deg);
-  } */
-  
-  /* .L {
-      
-    top: 0px;
-    left: -200px;
-    transform: rotate(-15deg);
-  }
-  
-  .C {
-    top: 50px;
-    left: -150px;
-    transform: rotate(0deg);
-  }
-  
-  .O {
-    top: 100px;
-    left: -100px;
-    transform: rotate(15deg);
-  }
-  
-  .M {
-    top: 150px;
-    left: -50px;
-    transform: rotate(30deg);
-  }
-  
-  .E {
-    top: 200px;
-    left: 0px;
-    transform: rotate(45deg);
-  }
     

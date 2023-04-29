@@ -2,14 +2,13 @@ const phrases = [
     "hello",
     "goodbye",
     "please",
-    "thank you",
+    "thankyou",
     "sorry",
     "yes",
     "no",
     "help",
     "excuse me",
     "nice to meet you",
-    "how are you?",
     "fine",
     "name",
     "age",
@@ -311,9 +310,10 @@ const phrases = [
 
   const imageContainer = document.getElementById('image-container');
   const startButton = document.getElementById('start-button');
-  const inputText = document.getElementById('input-text');
+  const inputText = document.getElementById('textbox');
   const submitButton = document.getElementById('submit-button');
   const message = document.getElementById('message');
+  const wordoftheday = document.getElementById('wordoftheday')
   const scoreElement = document.getElementById('score');
   const timerElement = document.getElementById('timer');
   let currentPhrase = '';
@@ -387,6 +387,7 @@ const phrases = [
               clearInterval(timer);
               inputText.disabled = true;
               submitButton.disabled = true;
+              wordoftheday.textContent = `The Word was ${currentPhrase}`
               message.textContent = `Game over! Your score is: ${score}`;
               message.style.color = 'red';
               startButton.disabled = false;
