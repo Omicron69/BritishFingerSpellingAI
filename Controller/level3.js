@@ -308,65 +308,66 @@ const words = [
     "valley",
     "desert"
   ];
-const showWord = document.getElementById("theword");
-const AnswerBox = document.getElementById("answerBox");
-const imageContainer = document.getElementById("image-container");
-const selectedWord = words[Math.floor(Math.random() * words.length)];
-const LengthofWord = selectedWord.length;
-const answerSlots = [];
-
-
-showWord.textContent = `Selected word: ${selectedWord}`;
-
-for (let i = 0; i < LengthofWord; i++) {
-  const slot = document.createElement("div");
-  slot.className = "word-slot";
-  AnswerBox.appendChild(slot);
-  answerSlots.push(slot);
-}
-
-//This uses split functionality to randomize the letters and show results on screen
-const randomAtoZgen = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
-const randomImageGen = Array.from(new Set([...selectedWord.toUpperCase(), ...randomAtoZgen])).slice(0, 10);
-
-//Was having an error where the images where already showing in order so this fixes it by shuffling the images again 
-const shuffleImageAgain = randomImageGen.sort(() => Math.random() - 0.5);
-console.log(shuffleImageAgain);
-console.log(randomImageGen)
-
-for (const letter of randomImageGen) {
-  const img = document.createElement("img");
-  img.src = `../View/assets/${letter}.png`;
-  img.className = "img-letter";
-  img.draggable = true;
-  img.addEventListener("dragstart", (e) => {
-    e.dataTransfer.setData("text/plain", letter);
-  });
-  imageContainer.appendChild(img);
-}
-
-AnswerBox.addEventListener("dragover", (e) => {
-  e.preventDefault();
-});
-
-AnswerBox.addEventListener("drop", (e) => {
-  e.preventDefault();
-  const letter = e.dataTransfer.getData("text/plain");
-  const target = e.target;
-
-  if (target.classList.contains("word-slot")) {
-    const index = answerSlots.indexOf(target);
-
-    if (selectedWord.toUpperCase()[index] === letter) {
-      target.innerHTML = letter;
-      target.style.backgroundColor = "lightgreen";
-    } else {
-      target.style.backgroundColor = "lightcoral";
+  let score = 0;
+  let timeLeft = 45;
+  let selectedWord = "";
+  let timerId;
+  
+  const showWord = document.getElementById("theword");
+  const AnswerBox = document.getElementById("answerBox");
+  const imageContainer = document.getElementById("image-container");
+  const scoreElement = document.getElementById("score");
+  const timerElement = document.getElementById("timer");
+  const missedWord = document.getElementById("missed-word");
+  const answerSlots = [];
+  
+  function startNewRound() {
+    clearTimeout(timerId);
+    timeLeft = 45;
+    AnswerBox.innerHTML = "";
+    imageContainer.innerHTML = "";
+    answerSlots.length = 0;
+  
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+    const LengthofWord = selectedWord.length;
+  
+    showWord.textContent = `Selected word: ${selectedWord}`;
+  
+    for (let i = 0; i < LengthofWord; i++) {
+      const slot = document.createElement("div");
+      slot.className = "word-slot";
+      AnswerBox.appendChild(slot);
+      answerSlots.push(slot);
     }
+  
+    const randomAtoZgen = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
+    const randomImageGen = Array.from(new Set([...selectedWord.toUpperCase(), ...randomAtoZgen])).slice(0, 10);
+    const shuffleImageAgain = randomImageGen.sort(() => Math.random() - 0.5);
+  
+    for (const letter of shuffleImageAgain) {
+      const img = document.createElement("img");
+      img.src = `../View/assets/${letter}.png`;
+      img.className = "img-letter";
+      img.draggable = true;
+      img.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", letter);
+      });
+      imageContainer.appendChild(img);
+    }
+  
+    timerId = setInterval(function() {
+      timeLeft--;
+      timerElement.textContent = `Time: ${timeLeft}`;
+  
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        missedWord.textContent = `Time's up! The word was ${selectedWord}`;
+        startNewRound();
+      }
+    }, 1000);
   }
-});
-
-AnswerBox.addEventListener("dragover", (e) => {
+  
+  AnswerBox.addEventListener("dragover", (e) => {
     e.preventDefault();
   });
   
@@ -385,7 +386,6 @@ AnswerBox.addEventListener("dragover", (e) => {
   AnswerBox.addEventListener("drop", (e) => {
     e.preventDefault();
     e.stopPropagation();
-  
     const letter = e.dataTransfer.getData("text/plain");
     const target = e.target;
   
@@ -395,20 +395,67 @@ AnswerBox.addEventListener("dragover", (e) => {
       const index = answerSlots.indexOf(target);
   
       if (selectedWord.toUpperCase()[index] === letter) {
-        const img = document.createElement("img");
-        img.src = `../View/assets/${letter}.png`;
-        img.className = "img-letter";
-        target.innerHTML = "";
-        target.appendChild(img);
+        target.textContent = letter;
         target.style.backgroundColor = "lightgreen";
+  
+        const completedWord = answerSlots.map(slot => slot.textContent).join('');
+        if (completedWord === selectedWord.toUpperCase()) {
+          score++;
+          scoreElement.textContent = `Score: ${score}`;
+          startNewRound();
+        }
       } else {
         target.style.backgroundColor = "lightcoral";
-        target.classList.add("shake");
-        setTimeout(() => {
-          target.classList.remove("shake");
-          target.style.backgroundColor = "";
-        }, 500);
       }
     }
   });
   
+
+      AnswerBox.addEventListener("dragover", (e) => {
+          e.preventDefault();
+      });
+
+      AnswerBox.addEventListener("dragenter", (e) => {
+          if (e.target.classList.contains("word-slot")) {
+              e.target.classList.add("drop-zone");
+          }
+      });
+
+      AnswerBox.addEventListener("dragleave", (e) => {
+          if (e.target.classList.contains("word-slot")) {
+              e.target.classList.remove("drop-zone");
+          }
+      });
+
+      AnswerBox.addEventListener("drop", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const letter = e.dataTransfer.getData("text/plain");
+          const target = e.target;
+
+          if (target.classList.contains("word-slot")) {
+              target.classList.remove("drop-zone");
+
+              const index = answerSlots.indexOf(target);
+
+              if (selectedWord.toUpperCase()[index] === letter) {
+                  const img = document.createElement("img");
+                  img.src = `../View/assets/${letter}.png`;
+                  img.className = "img-letter";
+                  target.innerHTML = "";
+                  target.appendChild(img);
+                  target.style.backgroundColor = "lightgreen";
+              } else {
+                  target.style.backgroundColor = "lightcoral";
+                  target.classList.add("shake");
+                  setTimeout(() => {
+                      target.classList.remove("shake");
+                      target.style.backgroundColor = "";
+                  }, 500);
+              }
+          }
+      });
+
+      // Start the first round
+      startNewRound();

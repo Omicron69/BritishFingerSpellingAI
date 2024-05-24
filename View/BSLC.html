@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- This is the Navbar -->
+    <div class='navbar'>
+      <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+      
+      <nav>
+          <ul class="nav_links">
+              <li><a href="HomePage.html">Home</a></li>
+              <li class="nav1"><a href="Levels.html">Levels</a></li>
+              <li><a href="../View/Handbook.html">Sign Language Handbook</a></li>
+              <li><a href="#">Achievements</a></li>
+          </ul>
+      </nav>
+      <a class="btm" href="../View/login.html"><button class="login">Login/Sign-Up</button></a>
+  </div>
+      
+
+  <div class= "Welcome-text">
+      <h1>Practice FingerSpelling With Webcam</h1>
+      <br>
+      <p>Try practicing the letter C British Sign</p>
+  </div>
+
+  <link rel="stylesheet" href="../View/css/handtrack.css">
+  <div class="container">
+    <div class="flex-box">
+      <img src="../View/assets/peacesign.png" alt="Peace Sign" class="letter-image">
+      <button class="btn" type="button" onclick="window.location.href='../View/HomePage.html'" >Go Back</button>
+    </div>
+    <div class="video-box">
+      <video class="input_video"></video>
+      <canvas class="output_canvas" width="1920px" height="1080px"></canvas>
+    </div>
+  </div>
+  <div class= "Welcome-text2">
+    <p>Accuracy: <span id="accuracy">0%</span></p>
+  </div>
+</body>
+</html>
+
+//
+<script type="module">
+  const videoElement = document.getElementsByClassName('input_video')[0];
+  const canvasElement = document.getElementsByClassName('output_canvas')[0];
+  const canvasCtx = canvasElement.getContext('2d');
+
+  function isSignC(landmarks) {
+  const thumbTip = landmarks[4];
+  const indexTip = landmarks[8];
+  const middleTip = landmarks[12];
+  const ringTip = landmarks[16];
+  const pinkyTip = landmarks[20];
+
+  const thumbIndexDist = Math.hypot(
+    thumbTip.x - indexTip.x,
+    thumbTip.y - indexTip.y,
+    thumbTip.z - indexTip.z
+  );
+
+  const indexMiddleDist = Math.hypot(
+    indexTip.x - middleTip.x,
+    indexTip.y - middleTip.y,
+    indexTip.z - middleTip.z
+  );
+
+  const indexRingDist = Math.hypot(
+    indexTip.x - ringTip.x,
+    indexTip.y - ringTip.y,
+    indexTip.z - ringTip.z
+  );
+
+  const indexPinkyDist = Math.hypot(
+    indexTip.x - pinkyTip.x,
+    indexTip.y - pinkyTip.y,
+    indexTip.z - pinkyTip.z
+  );
+
+  return thumbIndexDist > 0.1 && indexMiddleDist < 0.1 && indexRingDist < 0.1 && indexPinkyDist < 0.1;
+}
+
+
+
+
+
+
+//This was edited through the mediapipe and tensorflow examples that I edited to suit my needs
+  function onResults(results) {
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.scale(-1, 1);
+    canvasCtx.translate(-canvasElement.width, 0);
+    canvasCtx.drawImage(
+      results.image, 0, 0, canvasElement.width, canvasElement.height);
+    if (results.multiHandLandmarks) {
+      let detectedPeaceSign = false;
+      for (const landmarks of results.multiHandLandmarks) {
+        drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
+          { color: '#b042ff', lineWidth: 8 });
+        drawLandmarks(canvasCtx, landmarks, { color: '#ff2400', lineWidth: 2 });
+
+        detectedPeaceSign = isSignC(landmarks);
+        if (detectedPeaceSign) break;
+      }
+
+      //This is for console log to check if the numbers I put is right enough
+      console.log(JSON.stringify(results.multiHandLandmarks, null, 2));
+
+      if (results.multiHandLandmarks.length === 1) {
+        const accuracyText = document.getElementById("accuracy");
+        accuracyText.textContent = detectedPeaceSign ? "100%" : "0%";
+      }
+    }
+    canvasCtx.restore();
+  }
+
+  const hands = new Hands({locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+  }});
+  hands.setOptions({
+    maxNumHands: 2,
+    modelComplexity: 1,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
+  hands.onResults(onResults);
+
+  const camera = new Camera(videoElement, {
+    onFrame: async () => {
+      await hands.send({image: videoElement});
+    },
+    width: 1920,
+    height: 1080
+  });
+  camera.start();
+</script>
+
+
+
+  

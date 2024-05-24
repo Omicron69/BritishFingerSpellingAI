@@ -369,7 +369,7 @@ const phrases = [
               imagesDisplayed++;
   
               if (imagesDisplayed === currentPhrase.length) {
-                  submitButton.disabled = false; // Enable the submit button after all images are shown
+                  submitButton.disabled = false; 
               }
           }, 400 * i);
       }
