@@ -587,3 +587,72 @@ header {
     transform: rotate(45deg);
   }
     
+@media (max-width: 768px) {
+    body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 190px 16px 32px;
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        height: auto;
+        padding: 14px 12px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar .nav_links {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav_links li {
+        padding: 0;
+    }
+
+    li, a, .login {
+        font-size: 11px;
+    }
+
+    .logo {
+        width: 110px;
+        margin: 0;
+    }
+
+    .Welcome-text {
+        margin-top: 0;
+        font-size: 12px;
+        line-height: 1.7;
+        padding: 0 8px;
+    }
+
+    .container,
+    .button-container {
+        width: 100%;
+    }
+
+    .container,
+    .button-container,
+    .container > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .btn,
+    .btn2,
+    .btn3,
+    .btn4,
+    .btn5 {
+        width: 100%;
+        max-width: 360px;
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        padding: 1em;
+    }
+}
