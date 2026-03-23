@@ -320,7 +320,6 @@ const words = [
   const timerElement = document.getElementById("timer");
   const missedWord = document.getElementById("missed-word");
   const answerSlots = [];
-  const playableWords = words.filter(word => /^[a-z]+$/i.test(word));
   
   function startNewRound() {
     clearTimeout(timerId);
@@ -329,7 +328,7 @@ const words = [
     imageContainer.innerHTML = "";
     answerSlots.length = 0;
   
-    selectedWord = playableWords[Math.floor(Math.random() * playableWords.length)];
+    selectedWord = words[Math.floor(Math.random() * words.length)];
     const LengthofWord = selectedWord.length;
   
     showWord.textContent = `Selected word: ${selectedWord}`;

@@ -316,7 +316,6 @@ const phrases = [
   const wordoftheday = document.getElementById('wordoftheday')
   const scoreElement = document.getElementById('score');
   const timerElement = document.getElementById('timer');
-  const playablePhrases = phrases.filter(phrase => /^[a-z]+$/i.test(phrase));
   let currentPhrase = '';
   let score = 0;
   let timer;
@@ -351,7 +350,7 @@ const phrases = [
       message.textContent = '';
       inputText.value = '';
       inputText.focus();
-      currentPhrase = playablePhrases[Math.floor(Math.random() * playablePhrases.length)];
+      currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
       displayPhrase();
       startTimer();
   }
