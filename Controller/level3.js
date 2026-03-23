@@ -384,34 +384,6 @@ const words = [
     }
   });
   
-  AnswerBox.addEventListener("drop", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const letter = e.dataTransfer.getData("text/plain");
-    const target = e.target;
-  
-    if (target.classList.contains("word-slot")) {
-      target.classList.remove("drop-zone");
-  
-      const index = answerSlots.indexOf(target);
-  
-      if (selectedWord.toUpperCase()[index] === letter) {
-        target.textContent = letter;
-        target.style.backgroundColor = "lightgreen";
-  
-        const completedWord = answerSlots.map(slot => slot.textContent).join('');
-        if (completedWord === selectedWord.toUpperCase()) {
-          score++;
-          scoreElement.textContent = `Score: ${score}`;
-          startNewRound();
-        }
-      } else {
-        target.style.backgroundColor = "lightcoral";
-      }
-    }
-  });
-  
-
       AnswerBox.addEventListener("dragover", (e) => {
           e.preventDefault();
       });
@@ -444,9 +416,20 @@ const words = [
                   const img = document.createElement("img");
                   img.src = `../View/assets/${letter.toLowerCase()}.png`;
                   img.className = "img-letter";
+                  img.alt = letter;
                   target.innerHTML = "";
                   target.appendChild(img);
                   target.style.backgroundColor = "lightgreen";
+
+                  const completedWord = answerSlots
+                      .map(slot => slot.querySelector("img")?.alt || "")
+                      .join('');
+
+                  if (completedWord === selectedWord.toUpperCase()) {
+                      score++;
+                      scoreElement.textContent = `Score: ${score}`;
+                      startNewRound();
+                  }
               } else {
                   target.style.backgroundColor = "lightcoral";
                   target.classList.add("shake");
