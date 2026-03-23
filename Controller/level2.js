@@ -362,7 +362,7 @@ const phrases = [
       for (let i = 0; i < currentPhrase.length; i++) {
           const letter = currentPhrase[i].toUpperCase();
           const img = document.createElement('img');
-          img.src = `../View/assets/${letter}.png`;
+          img.src = `../View/assets/${letter.toLowerCase()}.png`;
           img.className = 'img-letter';
           setTimeout(() => {
               imageContainer.appendChild(img);

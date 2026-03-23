@@ -346,7 +346,7 @@ const words = [
   
     for (const letter of shuffleImageAgain) {
       const img = document.createElement("img");
-      img.src = `../View/assets/${letter}.png`;
+      img.src = `../View/assets/${letter.toLowerCase()}.png`;
       img.className = "img-letter";
       img.draggable = true;
       img.addEventListener("dragstart", (e) => {
@@ -441,7 +441,7 @@ const words = [
 
               if (selectedWord.toUpperCase()[index] === letter) {
                   const img = document.createElement("img");
-                  img.src = `../View/assets/${letter}.png`;
+                  img.src = `../View/assets/${letter.toLowerCase()}.png`;
                   img.className = "img-letter";
                   target.innerHTML = "";
                   target.appendChild(img);
