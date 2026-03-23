@@ -12,7 +12,7 @@ translateButton.addEventListener('click', () => {
             box.className = 'box';
 
             const img = document.createElement('img');
-            img.src = `../View/assets/${letter.toLowerCase()}.png`;
+            img.src = `../View/assets/${letter}.png`;
             img.alt = `${letter} Fingerspelling`;
             img.className = 'img-letter';
             box.appendChild(img);
