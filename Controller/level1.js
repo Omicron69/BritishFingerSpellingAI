@@ -60,7 +60,6 @@ function createSide(sideElement, items, type) {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
         cardElement.dataset.type = type;
-        cardElement.dataset.letter = type === 'letter' ? item : item.match(/\/([a-z])\.png$/i)[1].toUpperCase();
 
         if (type === 'letter') {
             cardElement.textContent = item;
@@ -92,8 +91,8 @@ function checkMatch() {
         const secondType = secondCard.dataset.type;
 
         if (firstType !== secondType) {
-            const firstContent = firstCard.dataset.letter;
-            const secondContent = secondCard.dataset.letter;
+            const firstContent = firstType === 'letter' ? firstCard.textContent : firstCard.querySelector('img').src.slice(-5, -4);
+            const secondContent = secondType === 'letter' ? secondCard.textContent : secondCard.querySelector('img').src.slice(-5, -4);
 
 
             if (firstContent === secondContent) {
