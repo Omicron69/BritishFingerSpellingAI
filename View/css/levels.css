@@ -25,6 +25,23 @@
   flex: auto;
 }
 
+.container {
+    width: min(100%, 1100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 10px 20px 48px;
+}
+
+.container > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
 .Welcome-text{
      font-size: 20px;
      font-family: 'Press Start 2P';
@@ -185,7 +202,7 @@ header {
      border: var(--clr-neon) 0.125em solid;
      padding: 1.0em 1.3em;
      margin-top: 80px;
-     border-radius: 0.25em;
+     border-radius: 1.1em;
      margin-left: 170px;
      
      
@@ -193,7 +210,7 @@ header {
          0 0 0.125em hsl(0 0% 100%/ 0.5),
          0 0 0.45em currentColor;
      
-     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
      
      position: relative;
         
@@ -265,14 +282,14 @@ header {
      border: var(--clr-neon) 0.125em solid;
      padding: 1.0em 1.3em;
      margin-top: 80px;
-     border-radius: 0.25em;
+     border-radius: 1.1em;
      
      
      text-shadow: 
          0 0 0.125em hsl(0 0% 100%/ 0.5),
          0 0 0.45em currentColor;
      
-     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
      
      position: relative;
         
@@ -337,14 +354,14 @@ header {
       border: var(--clr-neon) 0.125em solid;
       padding: 1.0em 1.3em;
       margin-top: 50px;
-      border-radius: 0.25em;
+      border-radius: 1.1em;
       
       
       text-shadow: 
           0 0 0.125em hsl(0 0% 100%/ 0.5),
           0 0 0.45em currentColor;
       
-      box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+      box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
       
       position: relative;
          
@@ -408,14 +425,14 @@ header {
      border: var(--clr-neon) 0.125em solid;
      padding: 1.0em 1.3em;
      margin-top: 50px;
-     border-radius: 0.25em;
+     border-radius: 1.1em;
      
      
      text-shadow: 
          0 0 0.125em hsl(0 0% 100%/ 0.5),
          0 0 0.45em currentColor;
      
-     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
      
      position: relative;
         
@@ -478,7 +495,7 @@ header {
     border: var(--clr-neon) 0.125em solid;
     padding: 1.0em 1.3em;
     margin-top: 50px;
-    border-radius: 0.25em;
+    border-radius: 1.1em;
     margin-left: 340px;
     
     
@@ -486,7 +503,7 @@ header {
         0 0 0.125em hsl(0 0% 100%/ 0.5),
         0 0 0.45em currentColor;
     
-    box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+    box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
     
     position: relative;
        
@@ -586,4 +603,110 @@ header {
     left: 0px;
     transform: rotate(45deg);
   }
-    
+
+@media (max-width: 768px) {
+    body {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        padding: 180px 16px 32px;
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        height: auto;
+        padding: 14px 12px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar .nav_links {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav_links li {
+        padding: 0;
+    }
+
+    li, a, .login {
+        font-size: 11px;
+    }
+
+    .logo {
+        width: 110px;
+        margin: 0;
+    }
+
+    .Welcome-text {
+        margin-top: 0;
+        font-size: 13px;
+        line-height: 1.8;
+        padding: 0 12px;
+        max-width: 420px;
+    }
+
+    .container,
+    .button-container,
+    .container > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .container {
+        gap: 16px;
+        padding: 12px 0 28px;
+    }
+
+    .btn,
+    .btn2,
+    .btn3,
+    .btn4,
+    .btn5 {
+        width: 100%;
+        max-width: 380px;
+        margin: 0;
+        padding: 1.2em 1em;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        border-radius: 1.35em;
+        background-image: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+        box-shadow: 0 0.4em 0.9em rgba(255, 0, 170, 0.25), 0 0 1.6em rgba(255, 0, 170, 0.28);
+    }
+
+    .btn::before,
+    .btn2::before,
+    .btn3::before,
+    .btn4::before,
+    .btn5::before {
+        top: 96%;
+        opacity: 0.45;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 168px;
+    }
+
+    .Welcome-text {
+        font-size: 11px;
+    }
+
+    .btn,
+    .btn2,
+    .btn3,
+    .btn4,
+    .btn5 {
+        font-size: 0.74rem;
+        padding: 1.15em 0.9em;
+    }
+}
