@@ -2,7 +2,7 @@ const inputText = document.getElementById('textbox');
 const translateButton = document.getElementById('translatebtn');
 const imageBox = document.getElementById('imagebox');
 
-translateButton.addEventListener('click', () => {
+function translateText() {
     const text = inputText.value.toUpperCase();
     imageBox.innerHTML = '';
 
@@ -12,7 +12,7 @@ translateButton.addEventListener('click', () => {
             box.className = 'box';
 
             const img = document.createElement('img');
-            img.src = `../View/assets/${letter}.png`;
+            img.src = `../View/assets/${letter.toLowerCase()}.png`;
             img.alt = `${letter} Fingerspelling`;
             img.className = 'img-letter';
             box.appendChild(img);
@@ -24,5 +24,13 @@ translateButton.addEventListener('click', () => {
 
             imageBox.appendChild(box);
         }
+    }
+}
+
+translateButton.addEventListener('click', translateText);
+
+inputText.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        translateText();
     }
 });
