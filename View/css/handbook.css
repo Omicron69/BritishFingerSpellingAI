@@ -19,7 +19,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    cursor: url(../assets/hand.png), auto;
+    cursor: url(assets\hand.png), auto;
 }
 
 .Welcome-text{
@@ -415,4 +415,5 @@ h2{
 .a3{
     margin-left: 50px;
 }
+
 

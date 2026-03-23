@@ -18,7 +18,7 @@
     margin: 0;
     padding: 0;
     background-color: var(--clr-bg);
-    cursor: url(../assets/hand.png), auto;
+    cursor: url(assets\hand.png), auto;
 }
 
 .Welcome-text{
@@ -351,3 +351,4 @@ button {
 #timer {
     margin-bottom: 10px;
 }
+
