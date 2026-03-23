@@ -358,17 +358,18 @@ const phrases = [
   function displayPhrase() {
       imageContainer.innerHTML = '';
       let imagesDisplayed = 0;
+      const displayableLetters = currentPhrase.split('').filter(letter => /[a-z]/i.test(letter));
   
-      for (let i = 0; i < currentPhrase.length; i++) {
-          const letter = currentPhrase[i].toUpperCase();
+      for (let i = 0; i < displayableLetters.length; i++) {
+          const letter = displayableLetters[i].toUpperCase();
           const img = document.createElement('img');
-          img.src = `../View/assets/${letter}.png`;
+          img.src = `../View/assets/${letter.toLowerCase()}.png`;
           img.className = 'img-letter';
           setTimeout(() => {
               imageContainer.appendChild(img);
               imagesDisplayed++;
   
-              if (imagesDisplayed === currentPhrase.length) {
+              if (imagesDisplayed === displayableLetters.length) {
                   submitButton.disabled = false; 
               }
           }, 400 * i);

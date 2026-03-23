@@ -48,7 +48,7 @@ function getNextRoundLetters() {
 
 function createGameBoard() {
     const letters = shuffle(roundLetters.slice());
-    const images = shuffle(roundLetters.slice()).map(letter => `../View/assets/${letter}.png`);
+    const images = shuffle(roundLetters.slice()).map(letter => `../View/assets/${letter.toLowerCase()}.png`);
     createSide(leftSide, images, 'image');
     createSide(rightSide, letters, 'letter');
 }

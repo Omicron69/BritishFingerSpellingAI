@@ -341,12 +341,13 @@ const words = [
     }
   
     const randomAtoZgen = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").sort(() => Math.random() - 0.5);
-    const randomImageGen = Array.from(new Set([...selectedWord.toUpperCase(), ...randomAtoZgen])).slice(0, 10);
+    const selectedLetters = selectedWord.toUpperCase().split('').filter(letter => /[A-Z]/.test(letter));
+    const randomImageGen = Array.from(new Set([...selectedLetters, ...randomAtoZgen])).slice(0, 10);
     const shuffleImageAgain = randomImageGen.sort(() => Math.random() - 0.5);
   
     for (const letter of shuffleImageAgain) {
       const img = document.createElement("img");
-      img.src = `../View/assets/${letter}.png`;
+      img.src = `../View/assets/${letter.toLowerCase()}.png`;
       img.className = "img-letter";
       img.draggable = true;
       img.addEventListener("dragstart", (e) => {
@@ -441,7 +442,7 @@ const words = [
 
               if (selectedWord.toUpperCase()[index] === letter) {
                   const img = document.createElement("img");
-                  img.src = `../View/assets/${letter}.png`;
+                  img.src = `../View/assets/${letter.toLowerCase()}.png`;
                   img.className = "img-letter";
                   target.innerHTML = "";
                   target.appendChild(img);
