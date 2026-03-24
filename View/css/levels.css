@@ -553,6 +553,37 @@ header {
     opacity: 1;
 }
 
+.container {
+    width: min(100%, 1120px);
+    gap: 2.6rem;
+    padding: 2rem 1.5rem 4rem;
+}
+
+.container > div {
+    justify-content: center;
+    gap: 2.6rem;
+}
+
+.btn,
+.btn2,
+.btn3,
+.btn4,
+.btn5 {
+    width: 32rem;
+    min-height: 10.25rem;
+    margin: 0;
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.btn5 {
+    width: 32rem;
+}
+
    /* .W {
     width: 70%;
     height: 70%;
@@ -642,10 +673,10 @@ header {
 
     .Welcome-text {
         margin-top: 0;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.8;
         padding: 0 12px;
-        max-width: 420px;
+        max-width: 320px;
     }
 
     .container,
@@ -660,7 +691,7 @@ header {
 
     .container {
         gap: 16px;
-        padding: 12px 0 28px;
+        padding: 8px 0 28px;
     }
 
     .btn,
@@ -669,7 +700,8 @@ header {
     .btn4,
     .btn5 {
         width: 100%;
-        max-width: 380px;
+        max-width: 420px;
+        min-height: 8.6rem;
         margin: 0;
         padding: 1.2em 1em;
         font-size: 0.88rem;
@@ -698,7 +730,7 @@ header {
     }
 
     .Welcome-text {
-        font-size: 11px;
+        font-size: 10px;
     }
 
     .btn,
@@ -706,7 +738,8 @@ header {
     .btn3,
     .btn4,
     .btn5 {
-        font-size: 0.74rem;
+        font-size: 0.72rem;
+        min-height: 7.6rem;
         padding: 1.15em 0.9em;
     }
 }
