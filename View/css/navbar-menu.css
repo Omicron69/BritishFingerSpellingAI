@@ -5,7 +5,7 @@
         height: 3.2rem;
         border: 0.125em solid var(--clr-neon);
         border-radius: 0.9rem;
-        background-color: rgba(255, 255, 255, 0.03);
+        background-color: rgba(255, 255, 255, 0.92);
         box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1rem 0 rgba(255, 0, 170, 0.2);
         align-items: center;
         justify-content: center;
@@ -29,6 +29,8 @@
         gap: 12px;
         height: auto !important;
         padding: 14px 12px;
+        background: transparent !important;
+        box-shadow: none !important;
     }
 
     .navbar nav {
@@ -48,16 +50,19 @@
         justify-content: center;
         gap: 0;
         margin-top: 6px;
-        border: 0.125em solid rgba(255, 0, 170, 0.45);
+        border: 0.125em solid rgba(255, 0, 170, 0.22);
         border-radius: 1.2rem;
         overflow: hidden;
-        box-shadow: 0 0 1.2rem rgba(255, 0, 170, 0.18);
+        box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(8px);
     }
 
     .nav_links li {
         width: 100%;
         padding: 0 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        background: transparent !important;
     }
 
     .nav_links li:last-child {
@@ -69,11 +74,19 @@
         width: 100%;
         padding: 1rem 1.1rem;
         text-align: center;
+        background: transparent !important;
+        color: #111 !important;
     }
 
     .btm {
         grid-column: 1 / -1;
         justify-self: center;
+    }
+
+    .logo,
+    .navbar .logo,
+    .navbar img {
+        background: transparent !important;
     }
 }
 
