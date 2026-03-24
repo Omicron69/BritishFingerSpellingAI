@@ -139,6 +139,29 @@ header {
     z-index: 1;
   }
 
+.menu-toggle {
+    display: none;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 0.125em solid var(--clr-neon);
+    border-radius: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1rem 0 rgba(255, 0, 170, 0.2);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.55rem;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 0.16rem;
+    border-radius: 999px;
+    background-color: var(--clr-neon);
+    display: block;
+}
+
 .nav_links li {
     display: inline-block;
     padding: 0px 15px;
@@ -647,19 +670,54 @@ header {
     .navbar {
         height: auto;
         padding: 14px 12px;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
         gap: 12px;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        justify-self: end;
+    }
+
+    .navbar nav {
+        width: 100%;
+        grid-column: 1 / -1;
+        display: none;
+    }
+
+    .navbar nav.is-open {
+        display: block;
     }
 
     .navbar .nav_links {
         width: 100%;
-        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
-        gap: 10px;
+        gap: 0;
+        margin-top: 6px;
+        border: 0.125em solid rgba(255, 0, 170, 0.45);
+        border-radius: 1.2rem;
+        overflow: hidden;
+        box-shadow: 0 0 1.2rem rgba(255, 0, 170, 0.18);
     }
 
     .nav_links li {
+        width: 100%;
         padding: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav_links li:last-child {
+        border-bottom: 0;
+    }
+
+    .nav_links li a {
+        display: block;
+        width: 100%;
+        padding: 1rem 1.1rem;
+        text-align: center;
     }
 
     li, a, .login {
@@ -669,6 +727,11 @@ header {
     .logo {
         width: 110px;
         margin: 0;
+    }
+
+    .btm {
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 
     .Welcome-text {

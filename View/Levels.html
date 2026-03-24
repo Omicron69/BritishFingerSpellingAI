@@ -15,8 +15,13 @@
         <!-- This is the Navbar -->
         <div class='navbar'>
             <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="levels-nav" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             
-            <nav>
+            <nav id="levels-nav">
                 <ul class="nav_links">
                     <li><a href="index.html">Home</a></li>
                     <li class="nav1"><a href="Levels.html">Levels</a></li>
@@ -53,6 +58,15 @@
 
         
         
-        <script src="" async defer></script>
+        <script>
+            const menuToggle = document.getElementById('menu-toggle');
+            const levelsNav = document.getElementById('levels-nav');
+
+            menuToggle.addEventListener('click', () => {
+                const isOpen = levelsNav.classList.toggle('is-open');
+                menuToggle.classList.toggle('is-open', isOpen);
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        </script>
     </body>
 </html>
