@@ -40,7 +40,7 @@ h1 {
     display: flex;
     overflow-x: auto;
     max-width: 100%;
-    padding: 20px;
+    padding: 24px;
     background-color: whitesmoke;
     border-radius: 60px;
     margin-bottom: 20px;
@@ -48,8 +48,8 @@ h1 {
 }
 
 .img-letter {
-    width: 210px;
-    height: 210px;
+    width: 260px;
+    height: 260px;
     margin-bottom: 10px;
     background-color: transparent;
 }
