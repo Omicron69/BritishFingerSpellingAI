@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../View/css/navbar-menu.css">
 </head>
 
 <body>
@@ -13,6 +14,11 @@
     <!-- This is the Navbar -->
     <div class='navbar'>
       <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
       
       <nav>
           <ul class="nav_links">
@@ -46,6 +52,7 @@
   <div class= "Welcome-text2">
     <p>Accuracy: <span id="accuracy">0%</span></p>
   </div>
+  <script src="../Controller/navbar-menu.js"></script>
 </body>
 </html>
 

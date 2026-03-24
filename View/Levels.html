@@ -9,19 +9,20 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../View/css/levels.css">
+        <link rel="stylesheet" href="../View/css/navbar-menu.css">
     </head>
     <body>
 
         <!-- This is the Navbar -->
         <div class='navbar'>
             <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
-            <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="levels-nav" aria-label="Open navigation menu">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             
-            <nav id="levels-nav">
+            <nav>
                 <ul class="nav_links">
                     <li><a href="index.html">Home</a></li>
                     <li class="nav1"><a href="Levels.html">Levels</a></li>
@@ -58,15 +59,6 @@
 
         
         
-        <script>
-            const menuToggle = document.getElementById('menu-toggle');
-            const levelsNav = document.getElementById('levels-nav');
-
-            menuToggle.addEventListener('click', () => {
-                const isOpen = levelsNav.classList.toggle('is-open');
-                menuToggle.classList.toggle('is-open', isOpen);
-                menuToggle.setAttribute('aria-expanded', String(isOpen));
-            });
-        </script>
+        <script src="../Controller/navbar-menu.js"></script>
     </body>
 </html>

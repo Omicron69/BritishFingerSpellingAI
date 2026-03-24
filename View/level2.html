@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSL Words Game Level 2</title>
     <link rel="stylesheet" href="../View/css/phrases.css">
+    <link rel="stylesheet" href="../View/css/navbar-menu.css">
 </head>
 <body>
 
      <!-- This is the Navbar -->
      <div class='navbar'>
         <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         
         <nav>
             <ul class="nav_links">
@@ -45,6 +51,7 @@
     <div class="congrats1">
         <p id="message"></p>
     </div>
+    <script src="../Controller/navbar-menu.js"></script>
     <script src="../Controller/level2.js"></script>
 </body>
 </html>

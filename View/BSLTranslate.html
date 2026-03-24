@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSL Translator</title>
     <link rel="stylesheet" href="../View/css/BSL.css">
+    <link rel="stylesheet" href="../View/css/navbar-menu.css">
 </head>
 <body>
 
     <div class='navbar'>
         <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         
         <nav>
             <ul class="nav_links">
@@ -29,6 +35,7 @@
     <div class="container" id="imagebox"></div>
     <input type="text" id="textbox" placeholder="Type here...">
     <button class='btn' id="translatebtn">Translate</button>
+    <script src="../Controller/navbar-menu.js"></script>
     <script src="../Controller/translate.js"></script>
 </body>
 </html>
