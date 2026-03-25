@@ -12,6 +12,7 @@
 *::before,
 *::after{
     box-sizing: border-box;
+    border-radius: 1.1em;
 }
 *{
     box-sizing: border-box;
