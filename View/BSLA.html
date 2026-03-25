@@ -11,7 +11,6 @@
 
 <body>
 
-    <!-- This is the Navbar -->
     <div class='navbar'>
       <div class="logo"><img class="logo" src="../View/assets/Hands-logos_white.png" alt="logo for Application that contains hands"></div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open navigation menu">
@@ -33,15 +32,14 @@
   <div class= "Welcome-text">
       <h1>Practice FingerSpelling With Webcam</h1>
       <br>
-      <p>Try practicing the word Peace Sign</p>
+      <p>Try practicing the letter A British Sign</p>
   </div>
 
   <link rel="stylesheet" href="../View/css/handtrack.css">
   <div class="container">
     <div class="flex-box">
-      <img src="../View/assets/peacesign.png" alt="Peace Sign" class="letter-image">
-      <button class="btn" type="button" onclick="window.location.href='../View/HomePage.html'" >Go Back</button>
-      <button class="btn" type="button" onclick="window.location.href='../View/BSLA.html'" >Next</button>
+      <img src="../View/assets/a.png" alt="Letter A sign" class="letter-image">
+      <button class="btn" type="button" onclick="window.location.href='../View/HandTracking.html'" >Back</button>
     </div>
     <div class="video-box">
       <video class="input_video"></video>
@@ -61,33 +59,86 @@
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
   const canvasCtx = canvasElement.getContext('2d');
 
-//This is borrowed from Mediapipe Hand Documentation for testing purposes
-  function isPeaceSign(landmarks) {
-    const indexTip = landmarks[8];
-    const middleTip = landmarks[12];
-    const ringTip = landmarks[16];
-    const pinkyTip = landmarks[20];
-
-    const indexDistToMiddle = Math.hypot(
-      indexTip.x - middleTip.x,
-      indexTip.y - middleTip.y,
-      indexTip.z - middleTip.z
-    );
-
-    const ringDistToPinky = Math.hypot(
-      ringTip.x - pinkyTip.x,
-      ringTip.y - pinkyTip.y,
-      ringTip.z - pinkyTip.z
-    );
-
-    const indexMiddleSeparated = indexDistToMiddle > 0.05;
-    const ringPinkyTogether = ringDistToPinky < 0.05;
-
-    return indexMiddleSeparated && ringPinkyTogether;
+  function isFingerExtended(landmarks, tipIndex, pipIndex) {
+    return landmarks[tipIndex].y < landmarks[pipIndex].y;
   }
 
+  function isCurledFinger(landmarks, tipIndex, pipIndex, mcpIndex) {
+    const tip = landmarks[tipIndex];
+    const pip = landmarks[pipIndex];
+    const mcp = landmarks[mcpIndex];
 
-//This was edited through the mediapipe and tensorflow examples that I edited to suit my needs
+    return tip.y > pip.y && tip.y > mcp.y;
+  }
+
+  function getPalmCenter(landmarks) {
+    return {
+      x: (landmarks[0].x + landmarks[5].x + landmarks[9].x + landmarks[13].x + landmarks[17].x) / 5,
+      y: (landmarks[0].y + landmarks[5].y + landmarks[9].y + landmarks[13].y + landmarks[17].y) / 5,
+      z: (landmarks[0].z + landmarks[5].z + landmarks[9].z + landmarks[13].z + landmarks[17].z) / 5
+    };
+  }
+
+  function distance3D(pointA, pointB) {
+    return Math.hypot(
+      pointA.x - pointB.x,
+      pointA.y - pointB.y,
+      pointA.z - pointB.z
+    );
+  }
+
+  function isCrossingHand(landmarks) {
+    return isFingerExtended(landmarks, 8, 6) &&
+      isFingerExtended(landmarks, 12, 10) &&
+      isCurledFinger(landmarks, 16, 14, 13) &&
+      isCurledFinger(landmarks, 20, 18, 17);
+  }
+
+  function hasDiagonalHandLine(landmarks) {
+    const indexMcp = landmarks[5];
+    const pinkyMcp = landmarks[17];
+    const diagonalX = Math.abs(indexMcp.x - pinkyMcp.x);
+    const diagonalY = Math.abs(indexMcp.y - pinkyMcp.y);
+
+    return diagonalX > 0.08 && diagonalY > 0.05;
+  }
+
+  function isCompactThumbShape(landmarks) {
+    return isCurledFinger(landmarks, 4, 3, 2) ||
+      distance3D(landmarks[4], landmarks[5]) < 0.18;
+  }
+
+  function isBackHandOpen(landmarks) {
+    return isFingerExtended(landmarks, 12, 10) &&
+      isFingerExtended(landmarks, 16, 14) &&
+      isFingerExtended(landmarks, 20, 18);
+  }
+
+  function isSignA(backHand, frontHand) {
+    if (!isBackHandOpen(backHand) || !isCrossingHand(frontHand)) {
+      return false;
+    }
+
+    const backPalmCenter = getPalmCenter(backHand);
+    const frontThumbTip = frontHand[4];
+    const frontIndexMcp = frontHand[5];
+    const frontMiddleMcp = frontHand[9];
+    const backIndexMcp = backHand[5];
+    const backMiddleMcp = backHand[9];
+
+    const crossedPalmContact = distance3D(frontIndexMcp, backPalmCenter) < 0.18 ||
+      distance3D(frontMiddleMcp, backPalmCenter) < 0.18;
+    const thumbNearBackPalm = distance3D(frontThumbTip, backPalmCenter) < 0.22;
+    const knuckleContact = distance3D(frontIndexMcp, backIndexMcp) < 0.22 ||
+      distance3D(frontMiddleMcp, backMiddleMcp) < 0.22;
+
+    return hasDiagonalHandLine(frontHand) &&
+      isCompactThumbShape(frontHand) &&
+      crossedPalmContact &&
+      thumbNearBackPalm &&
+      knuckleContact;
+  }
+
   function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -96,22 +147,23 @@
     canvasCtx.drawImage(
       results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiHandLandmarks) {
-      let detectedPeaceSign = false;
+      let detectedSignA = false;
       for (const landmarks of results.multiHandLandmarks) {
         drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
           { color: '#b042ff', lineWidth: 8 });
         drawLandmarks(canvasCtx, landmarks, { color: '#ff2400', lineWidth: 2 });
-
-        detectedPeaceSign = isPeaceSign(landmarks);
-        if (detectedPeaceSign) break;
       }
 
-      //This is for console log to check if the numbers I put is right enough
+      if (results.multiHandLandmarks.length >= 2) {
+        const [firstHand, secondHand] = results.multiHandLandmarks;
+        detectedSignA = isSignA(firstHand, secondHand) || isSignA(secondHand, firstHand);
+      }
+
       console.log(JSON.stringify(results.multiHandLandmarks, null, 2));
 
-      if (results.multiHandLandmarks.length === 1) {
+      if (results.multiHandLandmarks.length >= 1) {
         const accuracyText = document.getElementById("accuracy");
-        accuracyText.textContent = detectedPeaceSign ? "100%" : "0%";
+        accuracyText.textContent = detectedSignA ? "100%" : "0%";
       }
     }
     canvasCtx.restore();
