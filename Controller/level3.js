@@ -320,6 +320,64 @@ const words = [
   const timerElement = document.getElementById("timer");
   const missedWord = document.getElementById("missed-word");
   const answerSlots = [];
+  let selectedMobileLetter = null;
+  let selectedMobileImage = null;
+
+  function isMobileMode() {
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
+
+  function clearMobileSelection() {
+    selectedMobileLetter = null;
+
+    if (selectedMobileImage) {
+      selectedMobileImage.classList.remove("is-selected");
+      selectedMobileImage = null;
+    }
+  }
+
+  function finishRoundIfComplete() {
+    const completedWord = answerSlots
+      .map(slot => slot.querySelector("img")?.alt || "")
+      .join('');
+
+    if (completedWord === selectedWord.toUpperCase()) {
+      score++;
+      scoreElement.textContent = `Score: ${score}`;
+      startNewRound();
+    }
+  }
+
+  function handleIncorrectSlot(target) {
+    target.style.backgroundColor = "lightcoral";
+    target.classList.add("shake");
+    setTimeout(() => {
+      target.classList.remove("shake");
+      target.style.backgroundColor = "";
+    }, 500);
+  }
+
+  function placeLetterInSlot(letter, target) {
+    if (!target.classList.contains("word-slot") || target.querySelector("img")) {
+      return;
+    }
+
+    const index = answerSlots.indexOf(target);
+
+    if (selectedWord.toUpperCase()[index] === letter) {
+      const img = document.createElement("img");
+      img.src = `../View/assets/${letter.toLowerCase()}.png`;
+      img.className = "img-letter";
+      img.alt = letter;
+      target.innerHTML = "";
+      target.appendChild(img);
+      target.style.backgroundColor = "lightgreen";
+      clearMobileSelection();
+      finishRoundIfComplete();
+    } else {
+      handleIncorrectSlot(target);
+    }
+  }
   
   function startNewRound() {
     clearTimeout(timerId);
@@ -327,6 +385,7 @@ const words = [
     AnswerBox.innerHTML = "";
     imageContainer.innerHTML = "";
     answerSlots.length = 0;
+    clearMobileSelection();
   
     selectedWord = words[Math.floor(Math.random() * words.length)];
     const LengthofWord = selectedWord.length;
@@ -336,6 +395,11 @@ const words = [
     for (let i = 0; i < LengthofWord; i++) {
       const slot = document.createElement("div");
       slot.className = "word-slot";
+      slot.addEventListener("click", () => {
+        if (isMobileMode() && selectedMobileLetter) {
+          placeLetterInSlot(selectedMobileLetter, slot);
+        }
+      });
       AnswerBox.appendChild(slot);
       answerSlots.push(slot);
     }
@@ -352,6 +416,21 @@ const words = [
       img.draggable = true;
       img.addEventListener("dragstart", (e) => {
         e.dataTransfer.setData("text/plain", letter);
+      });
+      img.addEventListener("click", () => {
+        if (!isMobileMode()) {
+          return;
+        }
+
+        if (selectedMobileImage === img) {
+          clearMobileSelection();
+          return;
+        }
+
+        clearMobileSelection();
+        selectedMobileLetter = letter;
+        selectedMobileImage = img;
+        img.classList.add("is-selected");
       });
       imageContainer.appendChild(img);
     }
@@ -409,35 +488,7 @@ const words = [
 
           if (target.classList.contains("word-slot")) {
               target.classList.remove("drop-zone");
-
-              const index = answerSlots.indexOf(target);
-
-              if (selectedWord.toUpperCase()[index] === letter) {
-                  const img = document.createElement("img");
-                  img.src = `../View/assets/${letter.toLowerCase()}.png`;
-                  img.className = "img-letter";
-                  img.alt = letter;
-                  target.innerHTML = "";
-                  target.appendChild(img);
-                  target.style.backgroundColor = "lightgreen";
-
-                  const completedWord = answerSlots
-                      .map(slot => slot.querySelector("img")?.alt || "")
-                      .join('');
-
-                  if (completedWord === selectedWord.toUpperCase()) {
-                      score++;
-                      scoreElement.textContent = `Score: ${score}`;
-                      startNewRound();
-                  }
-              } else {
-                  target.style.backgroundColor = "lightcoral";
-                  target.classList.add("shake");
-                  setTimeout(() => {
-                      target.classList.remove("shake");
-                      target.style.backgroundColor = "";
-                  }, 500);
-              }
+              placeLetterInSlot(letter, target);
           }
       });
 

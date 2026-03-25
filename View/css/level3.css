@@ -96,6 +96,12 @@ body {
     border-radius: 50px;
 }
 
+.img-letter.is-selected {
+    border-color: #7CFF6B;
+    box-shadow: 0 0 0 4px rgba(124, 255, 107, 0.35);
+    transform: scale(1.06);
+}
+
 .word-slot.shake {
     animation: shake 0.5s;
   }
