@@ -243,7 +243,7 @@ header {
      pointer-events: none;
      content: '';
      position: absolute;
-     background: var(--clr-neon);
+     background: transparent;
      top: 90%;
      left: 0%;
      width: 100%;
@@ -322,7 +322,7 @@ header {
      pointer-events: none;
      content: '';
      position: absolute;
-     background: var(--clr-neon);
+     background: transparent;
      top: 90%;
      left: 0%;
      width: 100%;
@@ -394,7 +394,7 @@ header {
       pointer-events: none;
       content: '';
       position: absolute;
-      background: var(--clr-neon);
+      background: transparent;
       top: 90%;
       left: 0%;
       width: 100%;
@@ -465,7 +465,7 @@ header {
      pointer-events: none;
      content: '';
      position: absolute;
-     background: var(--clr-neon);
+     background: transparent;
      top: 90%;
      left: 0%;
      width: 100%;
@@ -536,7 +536,7 @@ header {
     pointer-events: none;
     content: '';
     position: absolute;
-    background: var(--clr-neon);
+    background: transparent;
     top: 90%;
     left: 0%;
     width: 100%;
