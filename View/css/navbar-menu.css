@@ -122,6 +122,31 @@
 }
 
 @media (min-width: 769px) {
+    .navbar {
+        display: grid !important;
+        grid-template-columns: auto 1fr auto;
+        align-items: center !important;
+        justify-content: unset !important;
+        width: 100%;
+    }
+
+    .navbar .logo {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .navbar nav {
+        grid-column: 2;
+        justify-self: center;
+    }
+
+    .navbar .nav_links {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center;
+        margin: 0 auto;
+    }
+
     .menu-toggle {
         display: none !important;
     }
