@@ -239,21 +239,6 @@ header {
         
  }
  
- .btn::before{
-     pointer-events: none;
-     content: '';
-     position: absolute;
-     background: var(--clr-neon);
-     top: 90%;
-     left: 0%;
-     width: 100%;
-     height: 100%;
-     
-     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-     filter: blur(1em);
-     opacity: 0.7;
-         
- }
  
  .btn::after{
      
@@ -318,21 +303,7 @@ header {
         
  }
  
- .btn2::before{
-     pointer-events: none;
-     content: '';
-     position: absolute;
-     background: var(--clr-neon);
-     top: 90%;
-     left: 0%;
-     width: 100%;
-     height: 100%;
-     
-     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-     filter: blur(1em);
-     opacity: 0.7;
-         
- }
+
  
  .btn2::after{
      
@@ -390,21 +361,7 @@ header {
          
   }
   
-  .btn3::before{
-      pointer-events: none;
-      content: '';
-      position: absolute;
-      background: var(--clr-neon);
-      top: 90%;
-      left: 0%;
-      width: 100%;
-      height: 100%;
-      
-      transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-      filter: blur(1em);
-      opacity: 0.7;
-          
-  }
+ 
   
   .btn3::after{
       
@@ -460,22 +417,7 @@ header {
      position: relative;
         
  }
- 
- .btn4::before{
-     pointer-events: none;
-     content: '';
-     position: absolute;
-     background: var(--clr-neon);
-     top: 90%;
-     left: 0%;
-     width: 100%;
-     height: 100%;
-     
-     transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-     filter: blur(1em);
-     opacity: 0.7;
-         
- }
+
  
  .btn4::after{
      
@@ -532,21 +474,7 @@ header {
        
 }
 
-.btn5::before{
-    pointer-events: none;
-    content: '';
-    position: absolute;
-    background: var(--clr-neon);
-    top: 90%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    
-    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
-    filter: blur(1em);
-    opacity: 0.7;
-        
-}
+
 
 .btn5::after{
     
