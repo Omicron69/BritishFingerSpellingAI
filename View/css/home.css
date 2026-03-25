@@ -335,4 +335,71 @@ header {
     left: 0px;
     transform: rotate(45deg);
   }
-    
+     */
+
+@media (max-width: 768px) {
+    body {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        padding: 0 1rem 2rem;
+        overflow-x: hidden;
+    }
+
+    .bottom {
+        width: 100%;
+        margin-top: 1rem !important;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.6rem;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .W,
+    .E,
+    .L,
+    .C,
+    .O,
+    .M {
+        width: min(100%, 4.4rem);
+        height: auto;
+    }
+
+    .Welcome-text {
+        margin-top: 1rem;
+        padding: 0 0.4rem;
+        font-size: 0.8rem;
+        line-height: 1.8;
+        max-width: 22rem;
+    }
+
+    .Welcome-text h1 {
+        font-size: 1.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .Welcome-text h2 {
+        font-size: 1rem;
+        line-height: 1.9;
+    }
+
+    .container,
+    .start-button {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.9rem;
+    }
+
+    .btn {
+        width: min(100%, 24rem);
+        min-height: 4.6rem;
+        padding: 1rem 1.1rem;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        text-align: center;
+        white-space: normal;
+    }
+}
