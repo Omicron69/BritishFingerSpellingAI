@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../View/css/handtrack.css">
   <div class="container">
     <div class="flex-box">
-      <img src="../View/assets/peacesign.png" alt="Peace Sign" class="letter-image">
-      <button class="btn" type="button" onclick="window.location.href='../View/index.html'" >Go Back</button>
+      <img src="../View/assets/c.png" alt="Letter C sign" class="letter-image">
+      <button class="btn" type="button" onclick="window.location.href='../View/BSLA.html'" >Back</button>
     </div>
     <div class="video-box">
       <video class="input_video"></video>
@@ -60,39 +60,58 @@
   const canvasElement = document.getElementsByClassName('output_canvas')[0];
   const canvasCtx = canvasElement.getContext('2d');
 
+  function distance3D(pointA, pointB) {
+    return Math.hypot(
+      pointA.x - pointB.x,
+      pointA.y - pointB.y,
+      pointA.z - pointB.z
+    );
+  }
+
+  function isFingerCurved(landmarks, tipIndex, pipIndex, mcpIndex) {
+    const tip = landmarks[tipIndex];
+    const pip = landmarks[pipIndex];
+    const mcp = landmarks[mcpIndex];
+
+    return tip.y < mcp.y && tip.y > pip.y - 0.08;
+  }
+
   function isSignC(landmarks) {
-  const thumbTip = landmarks[4];
-  const indexTip = landmarks[8];
-  const middleTip = landmarks[12];
-  const ringTip = landmarks[16];
-  const pinkyTip = landmarks[20];
+    const wrist = landmarks[0];
+    const thumbTip = landmarks[4];
+    const indexTip = landmarks[8];
+    const middleTip = landmarks[12];
+    const ringTip = landmarks[16];
+    const pinkyTip = landmarks[20];
+    const indexMcp = landmarks[5];
+    const middleMcp = landmarks[9];
+    const pinkyMcp = landmarks[17];
 
-  const thumbIndexDist = Math.hypot(
-    thumbTip.x - indexTip.x,
-    thumbTip.y - indexTip.y,
-    thumbTip.z - indexTip.z
-  );
+    const thumbIndexGap = distance3D(thumbTip, indexTip);
+    const thumbPinkyGap = distance3D(thumbTip, pinkyTip);
+    const indexPinkyGap = distance3D(indexTip, pinkyTip);
+    const handWidth = distance3D(indexMcp, pinkyMcp);
+    const handHeight = distance3D(wrist, middleTip);
 
-  const indexMiddleDist = Math.hypot(
-    indexTip.x - middleTip.x,
-    indexTip.y - middleTip.y,
-    indexTip.z - middleTip.z
-  );
+    const curvedIndex = isFingerCurved(landmarks, 8, 6, 5);
+    const curvedMiddle = isFingerCurved(landmarks, 12, 10, 9);
+    const curvedRing = isFingerCurved(landmarks, 16, 14, 13);
+    const curvedPinky = isFingerCurved(landmarks, 20, 18, 17);
 
-  const indexRingDist = Math.hypot(
-    indexTip.x - ringTip.x,
-    indexTip.y - ringTip.y,
-    indexTip.z - ringTip.z
-  );
+    const thumbFormsOpenSide = thumbTip.x < indexTip.x && thumbIndexGap > handWidth * 0.45;
+    const openArc = thumbIndexGap < handWidth * 1.35 && thumbPinkyGap > handWidth * 0.7;
+    const fingersStacked = indexPinkyGap < handWidth * 0.95;
+    const handIsUpright = handHeight > handWidth * 0.9;
 
-  const indexPinkyDist = Math.hypot(
-    indexTip.x - pinkyTip.x,
-    indexTip.y - pinkyTip.y,
-    indexTip.z - pinkyTip.z
-  );
-
-  return thumbIndexDist > 0.1 && indexMiddleDist < 0.1 && indexRingDist < 0.1 && indexPinkyDist < 0.1;
-}
+    return curvedIndex &&
+      curvedMiddle &&
+      curvedRing &&
+      curvedPinky &&
+      thumbFormsOpenSide &&
+      openArc &&
+      fingersStacked &&
+      handIsUpright;
+  }
 
 
 
