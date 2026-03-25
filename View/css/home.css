@@ -217,16 +217,16 @@ header {
      text-decoration: none;
      color: var(--clr-neon);
      border: var(--clr-neon) 0.125em solid;
-     padding: 1.0em 1.3em;
-     margin: 0.25em;
-     border-radius: 0.25em;
+     padding: 1.05em 1.45em;
+     margin: 0.35em;
+     border-radius: 1.1em;
      
      
      text-shadow: 
          0 0 0.125em hsl(0 0% 100%/ 0.5),
          0 0 0.45em currentColor;
      
-     box-shadow: 0 0 0.5em 0 var(--clr-neon), 0 0 0.5rem 0 var (--clr-neon);
+     box-shadow: 0 0 0.7em 0 var(--clr-neon), 0 0 1.4rem 0 rgba(255, 0, 170, 0.35);
      
      position: relative;
         
@@ -272,9 +272,18 @@ header {
      
  }
  
- .btn:hover::after{
+.btn:hover::after{
      opacity: 1;
  }
+
+.container,
+.start-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
   
   @keyframes fadeIn {
     from {
